@@ -2,7 +2,7 @@
 <form action="includes/recover_inc.php" method="POST">
 <p>Recover Password</p>
 <input type="text" name="email" placeholder="email"><br>
-<input type="submit" name="login" value="Recover"> 
+<input type="submit" name="forgot" value="Recover"> 
 </form>
 </main> 
 Have an account? <a href="login.php">sign_in</a><br>
