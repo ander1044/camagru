@@ -36,6 +36,12 @@ if (isset($_POST['signup']))
         header("Location: ../signup.php?error=invalidpassword");
         exit();
     }
+    else
+    {
+        $hashing = password_hash($password, PASSWORD_DEFAULT);
+        header("Location: ../signup.php?signup=success");
+        exit();
+    }
 
 echo "mail: " .$email. "<br>";
 echo "name: " .$fullname. "<br>";
