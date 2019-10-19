@@ -14,9 +14,10 @@ if (isset($_POST['signup']))
     $username = $_POST['username'];
     $password = $_POST['password'];
     $repassword = $_POST['repassword'];
+    $gender = $_POST['gender'];
 
     if (empty($email) || empty($fullname) 
-    || empty($username) || empty($password) || empty($repassword))
+    || empty($username) || empty($password) || empty($repassword || empty($gender)))
     {
         header("Location: ../signup.php?error=emptyfields");
         exit();
@@ -36,17 +37,23 @@ if (isset($_POST['signup']))
         header("Location: ../signup.php?error=invalidpassword");
         exit();
     }
-    else
+    else if(!preg_match("/^[a-zA-Z ]*$/", $fullname))
     {
-        $hashing = password_hash($password, PASSWORD_DEFAULT);
-        header("Location: ../signup.php?signup=success");
+        header("Location: ../signup.php?error=invalidnameformat");
         exit();
     }
+    // else
+    // {
+    //     $hashing = password_hash($password, PASSWORD_DEFAULT);
+    //     header("Location: ../signup.php?signup=success");
+    //     exit();
+    // }
 
 echo "mail: " .$email. "<br>";
 echo "name: " .$fullname. "<br>";
 echo "user: " .$username. "<br>";
 echo "password: " .$password. "<br>";
-echo "repassword: " .$repassword;
+echo "repassword: " .$repassword. "<br>";
+echo "gender:" .$gender;
 }
 ?>
