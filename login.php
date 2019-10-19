@@ -5,5 +5,6 @@
 <input type="password" name="password" placeholder="password"><br>
 <input type="submit" name="login" value="Sign_in"> 
 </form>
-</main>
+</main> 
+<a href="forgot.php">Forgot Password?</a><br>
 Don't have an account? <a href="signup.php">sign_up</a>

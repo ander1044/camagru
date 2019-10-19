@@ -37,10 +37,10 @@ if (isset($_POST['signup']))
         exit();
     }
 
-echo "mail:" .$email. "<br>";
-echo "name:" .$fullname. "<br>";
-echo "user:" .$username. "<br>";
-echo "password:" .$password. "<br>";
-echo "repassword:" .$repassword;
+echo "mail: " .$email. "<br>";
+echo "name: " .$fullname. "<br>";
+echo "user: " .$username. "<br>";
+echo "password: " .$password. "<br>";
+echo "repassword: " .$repassword;
 }
 ?>
