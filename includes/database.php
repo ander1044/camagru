@@ -1,12 +1,27 @@
 <?php
 
-$con = mysqli_connect("localhost", $name, $password);
+$DB_DSN = "localhost";
+$DB_USER = "root";
+$DB_PASSWORD = "";
+$dbname = "camagru";
+try{
+    $con = new PDO("mysql:host=$DB_DSN", $DB_USER, $DB_PASSWORD);
+    $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $sql = $con->prepare("CREATE DATABASE camagru");
+    $sql->execute();
+    $con = null;
+}
+catch(PDOException $e)
+{
+    echo $sql . "<br>" . $e->getMessage();
+}
 
-$sql = $con->prepare("CREATE DATABASE camagru");
-$sql->execute();
-$con = mysqli_connect("localhost", $name, $password, "camagru");
+try{
 
-$usertable = $con->prepare("CREATE TABLE users(
+    $conn = new PDO("mysql:host=$DB_DSN;dbname=$dbname", $DB_USER, $DB_PASSWORD);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    $usertable = $conn->prepare("CREATE TABLE users(
         id INT(6) NOT NULL UNIQUE AUTO_INCREMENT,
         firstname VARCHAR(100),
         lastname VARCHAR(100),
@@ -17,4 +32,9 @@ $usertable = $con->prepare("CREATE TABLE users(
         verified INT(2)
         )
     ");
-$usertable->execute();
+    $usertable->execute();
+}
+catch(PDOException $e)
+{
+    echo $usertable."<br>" . $e->getMessage();
+}

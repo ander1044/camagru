@@ -3,7 +3,7 @@ if (isset($_POST['forgot']))
 {
     $checker = bin2hex(random_bytes(10));
     $token = random_bytes(32);
-    $link = "www.camagru.com/passwordrecovery.php?checker=" .$checker. "&validator=" .bin2hex($token);
+    $link = "localhost/passwordrecovery.php?checker=" .$checker. "&validator=" .bin2hex($token);
     $expiry = date("U") + 900;
     $email = $_POST['email'];
 
