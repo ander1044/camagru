@@ -57,9 +57,15 @@ echo "gender:" .$gender;
         $sql = $con->prepare("INSERT INTO users (firstname, lastname, userid, password, gender, email, verified) 
         VALUES (?,?,?,?,?,?,?)");
       $sql->bind_param("sssssss",$fullname, $fullname, $username, $password,$gender,$email, $ver);
-    $sql->execute(); 
+        if ($sql->execute() === TRUE)
+        {
+        $to = $email;
+        $subject = "Verify email";
+        $txt = "Hello world!";
+        $headers = "From: lmhlanga@student.wethinkcode.co.za" . "\r\n" .
+        "CC: somebodyelse@example.com";
+        mail($to,$subject,$txt,$headers);
+        } 
     }
-
-
 }
 ?> 

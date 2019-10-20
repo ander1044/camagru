@@ -10,6 +10,7 @@
     <main>
 
 <p>Create your account</p>
+<form action = "includes/signup_inc.php" method  = "post">
 <input type="text" name="email" placeholder="email" required><br>
 <input type="text" name="name" placeholder="Full Name" required><br>
 <input type="text" name="username" placeholder="Username"required><br>
