@@ -1,6 +1,16 @@
-<main>
-<form action="includes/signup_inc.php" method="POST">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <main>
+
 <p>Create your account</p>
+<form action="includes/signup_inc.php" method="POST">
 <input type="text" name="email" placeholder="email"><br>
 <input type="text" name="name" placeholder="Full Name"><br>
 <input type="text" name="username" placeholder="Username"><br>
@@ -13,3 +23,5 @@
 </form>
 Have an account? <a href="login.php">sign_in</a>
 </main>
+</body>
+</html>

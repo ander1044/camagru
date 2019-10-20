@@ -1,4 +1,5 @@
 <?php
+include_once("connect.php");
 function validPass($password)
 {
     if(strlen($password) >= 8){
@@ -42,18 +43,23 @@ if (isset($_POST['signup']))
         header("Location: ../signup.php?error=invalidnameformat");
         exit();
     }
-    // else
-    // {
-    //     $hashing = password_hash($password, PASSWORD_DEFAULT);
-    //     header("Location: ../signup.php?signup=success");
-    //     exit();
-    // }
-
-echo "mail: " .$email. "<br>";
+     else
+     {
+         $hashing = password_hash($password, PASSWORD_DEFAULT);
+         echo "mail: " .$email. "<br>";
 echo "name: " .$fullname. "<br>";
 echo "user: " .$username. "<br>";
-echo "password: " .$password. "<br>";
+echo "password: " .$hashing. "<br>";
 echo "repassword: " .$repassword. "<br>";
 echo "gender:" .$gender;
+
+        $ver = 0;
+        $sql = $con->prepare("INSERT INTO users (firstname, lastname, userid, password, gender, email, verified) 
+        VALUES (?,?,?,?,?,?,?)");
+      $sql->bind_param("sssssss",$fullname, $fullname, $username, $password,$gender,$email, $ver);
+    $sql->execute(); 
+    }
+
+
 }
-?>
+?> 
