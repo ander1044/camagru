@@ -10,20 +10,11 @@
     <main>
 
 <p>Create your account</p>
-<<<<<<< HEAD
-<form action="includes/signup_inc.php" method="POST">
-<input type="text" name="email" placeholder="email"><br>
-<input type="text" name="name" placeholder="Full Name"><br>
-<input type="text" name="username" placeholder="Username"><br>
-<input type="password" name="password" placeholder="Password"><br>
-<input type="password" name="repassword" placeholder="Retype Password"><br>
-=======
 <input type="text" name="email" placeholder="email" required><br>
 <input type="text" name="name" placeholder="Full Name" required><br>
 <input type="text" name="username" placeholder="Username"required><br>
 <input type="password" name="password" placeholder="Password"required><br>
 <input type="password" name="repassword" placeholder="Retype Password"required><br>
->>>>>>> 372c610987d7d7cc7956c1f3b0845dbb14492dd6
 <input type="radio" name="gender" value="male">Male
 <input type="radio" name="gender" value="female">Female
 <input type="radio" name="gender" value="other">Other<br>
