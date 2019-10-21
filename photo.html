@@ -1,0 +1,131 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Photo</title>
+</head>
+<body>
+    <input type="file" accept="image/*;capture=camera">
+    <input type="file" accept="video/*;capture=camcorder">
+    <device type="media" onchange="update(this.data)"></device> 
+    <script>
+        function update(stream)
+        {
+            document.querySelector('video').src = stream.url;
+        }
+    </script>
+
+
+
+
+
+    <script>
+    function hasGetUserMedia() {
+        return !!(navigator.mediaDevices &&
+          navigator.mediaDevices.getUserMedia);
+      }
+      
+      if (hasGetUserMedia()) {
+        // Good to go!
+      } else {
+        alert('getUserMedia() is not supported by your browser');
+      }
+    </script>
+
+
+
+
+
+
+
+<video autoplay></video>
+
+<script>
+const constraints = {
+  video: true
+};
+
+const video = document.querySelector('video');
+
+navigator.mediaDevices.getUserMedia(constraints).
+  then((stream) => {video.srcObject = stream});
+</script>
+
+
+<video autoplay></video>
+<p><button class="capture-button">Capture video</button>
+<p><button id="cssfilters-apply">Apply CSS filter</button></p>
+
+<script>
+const captureVideoButton =
+  document.querySelector('#cssfilters .capture-button');
+const cssFiltersButton =
+  document.querySelector('#cssfilters-apply');
+const video =
+  document.querySelector('#cssfilters video');
+
+let filterIndex = 0;
+const filters = [
+  'grayscale',
+  'sepia',
+  'blur',
+  'brightness',
+  'contrast',
+  'hue-rotate',
+  'hue-rotate2',
+  'hue-rotate3',
+  'saturate',
+  'invert',
+  ''
+];
+
+captureVideoButton.onclick = function() {
+  navigator.mediaDevices.getUserMedia(constraints).
+    then(handleSuccess).catch(handleError);
+};
+
+cssFiltersButton.onclick = video.onclick = function() {
+  video.className = filters[filterIndex++ % filters.length];
+};
+
+function handleSuccess(stream) {
+  video.srcObject = stream;
+}
+</script>
+
+</body>
+</html> -->
+
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      HTML Webcam Capture Demo
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <script src="capture.js"></script>
+    <style>
+      #vid-show, #vid-canvas, #vid-take {
+        display: block;
+        margin-bottom: 20px;
+      }
+      html, body {
+        padding: 0;
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="vid-controls">
+      <video id="vid-show" autoplay></video>
+      <input id="vid-take" type="button" value="Take Photo"/>
+      <div id="vid-canvas"></div>
+    </div>
+  </body>
+</html>
+
+
