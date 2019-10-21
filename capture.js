@@ -17,7 +17,10 @@ window.addEventListener("load", function(){
     var video = document.getElementById("vid-show"),
         canvas = document.getElementById("vid-canvas"),
         take = document.getElementById("vid-take");
-        apply = document.getElementById("filters-apply");
+        // filter = document.getElementById("filter-apply");
+      //  const apply = document.querySelector('#filter-apply');
+        //const take = document.querySelector('#filter-apply .vid-take');
+        //const video = document.querySelector('#filter-apply video');
 
   
     // [2] ASK FOR USER PERMISSION TO ACCESS CAMERA
@@ -45,11 +48,15 @@ window.addEventListener("load", function(){
       document.getElementById("vid-controls").innerHTML = "Please enable access and attach a camera";
     });
     //Iterate through filters
-    var effect = filters[defualt_filter++ % filters.length];
-    if (effect)
+    // var effect = filters[defualt_filter++ % filters.length];
+    // if (effect)
+    // {
+    //     video.classList.add(effect);
+    //     canvas.classList.add(effect);
+    //     this.document.querySelector('.container h3').innerHTML = 'Current filter is: ' +effect;
+    // }
+    apply.onclick = video.onclick = function()
     {
-        video.classList.add(effect);
-        canvas.classList.add(effect);
-        this.document.querySelector('.container h3').innerHTML = 'Current filter is: ' +effect;
-    }
+      video.className = filters[defualt_filter++ % filters.length];
+    };
   });
