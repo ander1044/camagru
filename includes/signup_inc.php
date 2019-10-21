@@ -87,4 +87,39 @@ if (isset($_POST['signup']))
         }
     }
 }
+
+if (isset($_POST['update']))
+{
+    $email = $_GET['id'];
+    $password = $_POST['newpassword'];
+    $conpass = $_POST['retypepassword'];
+   
+   if ($password !== $conpass)
+    {
+        header("Location: ../passwordrecovery.php?error=passwordnotmatching&id=".$email);
+        exit();
+    }
+    elseif (validPass($password) !== TRUE)
+    {
+        header("Location: ../passwordrecovery.php?error=invalidpassword&id=".$email);
+        exit();
+    }
+    else
+    {
+        $options = [ 'cost' =>12,];
+        $hash = password_hash($password, PASSWORD_BCRYPT, $options);
+        $sql = $con->prepare("UPDATE users SET password = ? WHERE email = ?");
+        $arr = array($hash, $email);
+        if ($sql->execute($arr) === TRUE)
+        {
+            echo '<script>alert("password updated, Continue to login!")</script>';
+            echo '<script>window.location="../login.php"</script>';
+        }
+        else
+        {
+            echo '<script>alert("password Not updated, Try again!")</script>';
+            echo '<script>window.location="../passwordrecovery.php?&id=".$email"</script>';
+        }
+    }
+}
 ?> 

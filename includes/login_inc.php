@@ -38,6 +38,6 @@ if (isset($_POST['login']))
             echo '<script>alert("Username or Password Incorrect")</script>';
             echo '<script>window.location = "../login.php" </script>';
         }
-        }
     }
+}
 ?>
