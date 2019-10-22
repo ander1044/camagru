@@ -7,9 +7,9 @@
 
   var canvas = document.getElementById('canvas'),
   context = canvas.getContext('2d'),
-  video = document.getElementById('video'),
+  video = document.getElementById('video');
   //filter = document.getElementById('filters'),
-  vendorUrl = window.URL || window.webkitURL;
+  //vendorUrl = window.URL || window.webkitURL;
 
   navigator.getMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
 
@@ -18,7 +18,8 @@
     audio: false
   },
   function(stream){
-    video.src = vendorUrl.createObjectURL(stream);
+    video.srcObject = stream;
+   // video.src = vendorUrl.createObjectURL(stream);
     video.play();
   },
   function(error){
