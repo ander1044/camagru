@@ -1,3 +1,6 @@
+<?php
+require("header.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,9 +11,11 @@
 </head>
 <body>
     <main>
-
-<p>Create your account</p>
+<div class="container">
 <form action = "includes/signup_inc.php" method  = "post">
+<h1>Register</h1>
+<p>Create your account</p>
+<hr>
 <input type="text" name="email" placeholder="email" required><br>
 <input type="text" name="name" placeholder="Full Name" required><br>
 <input type="text" name="username" placeholder="Username"required><br>
@@ -20,8 +25,11 @@
 <input type="radio" name="gender" value="female">Female
 <input type="radio" name="gender" value="other">Other<br>
 <input type="submit" name="signup" value="Sign_up">
-</form>
+<div class ="container sign">
 Have an account? <a href="login.php">sign_in</a>
+</div>
+</form>
+
 </main>
 </body>
 </html>
