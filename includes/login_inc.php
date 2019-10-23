@@ -1,4 +1,7 @@
 <?php
+    session_start();
+    if (!isset($_SESSION['login']))
+    {
     include_once("connect.php");
     if (isset($_POST['login']))
     {
@@ -26,8 +29,9 @@
                 {
                     if ($pass['verified'] == 1)
                     {
+                        $_SESSION['login'] = $pass['userid'];
                         echo '<script>alert("Password Correct")</script>';
-                        echo '<script>window.location = "#" </script>';
+                        echo '<script>window.location = "index.php" </script>';
                     }
                     else
                     {
@@ -53,4 +57,9 @@
             echo "error".$e;
         }
     }
+}
+else
+{
+    echo '<script>window.location = "index.php" </script>';
+}
 ?>

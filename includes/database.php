@@ -2,7 +2,7 @@
 
 $DB_DSN = "localhost";
 $DB_USER = "root";
-$DB_PASSWORD = "";
+$DB_PASSWORD = "123456";
 $dbname = "camagru";
 try{
     $con = new PDO("mysql:host=$DB_DSN", $DB_USER, $DB_PASSWORD);
@@ -32,7 +32,15 @@ try{
         verified INT(2)
         )
     ");
+    $imagetable = $conn->prepare("CREATE TABLE images(
+        imageid INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+        userid VARCHAR(100) NOT NULL,
+        description VARCHAR(200),
+        image VARCHAR(100) NOT NULL ,
+        time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP )ENGINE = InnoDB"
+    );
     $usertable->execute();
+    $imagetable->execute();
     $conn = null;
 }
 catch(PDOException $e)
