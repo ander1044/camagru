@@ -1,9 +1,10 @@
 <?php
 require("header.php");
+require("includes/login_inc.php");
 ?>
 <main>
 <div class="container">
-<form action="includes/login_inc.php" method="POST">
+<form action="#" method="POST">
 <p>Have an account?</p>
 <hr>
 <input type="text" name="username" placeholder="username/email"required><br>

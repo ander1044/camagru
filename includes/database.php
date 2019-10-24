@@ -26,7 +26,7 @@ try{
         firstname VARCHAR(100),
         lastname VARCHAR(100),
         userid VARCHAR(100) PRIMARY KEY NOT NULL,
-        password VARCHAR(100) NOT NULL,
+        `password` VARCHAR(100) NOT NULL,
         gender VARCHAR(10),
         email VARCHAR(100) UNIQUE,
         verified INT(2)
@@ -35,9 +35,10 @@ try{
     $imagetable = $conn->prepare("CREATE TABLE images(
         imageid INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
         userid VARCHAR(100) NOT NULL,
-        description VARCHAR(200),
-        image VARCHAR(100) NOT NULL ,
-        time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP )ENGINE = InnoDB"
+        `description` VARCHAR(200),
+        `image` VARCHAR(100) NOT NULL,
+        `target` VARCHAR(100) NOT NULL,
+        `time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP )ENGINE = InnoDB"
     );
     $usertable->execute();
     $imagetable->execute();

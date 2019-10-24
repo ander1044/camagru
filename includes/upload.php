@@ -7,16 +7,18 @@ if (isset($_FILES['fileToUpload']))
     $type = $_FILES['fileToUpload']['tmp_name'];
     $tmpn =  getimagesize($_FILES['fileToUpload']['tmp_name']);
     $target = "../images/";
-    if (isset($tmpn))
+
+    if (!empty($tmpn))
     {
         move_uploaded_file($type, $target.$name);
         try
         {
-            $sql = $con->prepare("INSERT INTO images (userid, description, image, time) VALUES(?,?,?,now())");
-            $arr = array($_SESSION['login'],"", $name);
+            $sql = $con->prepare("INSERT INTO images (userid, `description`, `image`, `target`, `time`) VALUES(?,?,?,?,now())");
+            $arr = array($_SESSION['login'],"",$name, "images/".$name);
             if ($sql->execute($arr) === TRUE)
             {
                 echo '<script>alert("Image added succesfully")</script>';
+                echo '<script>window.location = "index.php"</script>';
             }
         }
         catch(PDOException $e)
@@ -26,7 +28,7 @@ if (isset($_FILES['fileToUpload']))
     }
     else
     {
-        $type;
+        echo '<script>alert("invalid image Selected")</script>';
     }
 }
 ?>

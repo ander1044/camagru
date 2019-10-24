@@ -1,6 +1,6 @@
 <?php
 session_start();
-    include_once("connect.php");
+include_once("connect.php");
     if (isset($_POST['email_change']))
     {
         
@@ -8,7 +8,7 @@ session_start();
         $userid = $_SESSION['login'];
         if (!filter_var($change, FILTER_VALIDATE_EMAIL))
         {
-            header("Location: ../changedetails.php?error=invalidmail");
+            echo '<script>alert("Invalid Email")</script>';
             exit();
         }
         else
@@ -20,12 +20,12 @@ session_start();
                 if ($sql->execute($arr) === TRUE)
                 {
                     echo '<script>alert("Your email has been change!")</script>';
-                    echo '<script>window.location = "../changedetails.php"</script>';
+                    echo '<script>window.location = "changedetails.php"</script>';
+         
                 }
                 else
                 {
                     echo '<script>alert("Your email has been change. Check your inbox for verification")</script>';
-                    echo '<script>window.location = "../changedetails.php"</script>';
                 }
                 $con = null;
             }
@@ -35,40 +35,50 @@ session_start();
             }
         }
     }
-    if (isset($_POST['update_p']))
+    if (isset($_POST['update']))
     {
-        $userid = "lucky";
+        function validPass($password)
+        {
+            if(strlen($password) >= 8){
+                if(!ctype_alpha($password) && !ctype_lower($password)){
+                    return TRUE;
+                }
+            }
+        }
+        $userid = $_GET['id'];
         $password = $_POST['newpassword'];
         $conpass = $_POST['retypepassword'];
-    
+        
         
         if ($password !== $conpass)
         {
-            header("Location: ../changedetails.php?error=passwordnotmatching");
             exit();
         }
         elseif (validPass($password) !== TRUE)
         {
-            header("Location: ../changedetails.php?error=invalidpassword");
             exit();
         }
         else
         {
+            if (empty($userid))
+            {
+                $userid = $_SESSION['email'];
+            }
+            echo $userid;
+           
             try
             {
                 $options = [ 'cost' =>12,];
                 $hash = password_hash($password, PASSWORD_BCRYPT, $options);
-                $sql = $con->prepare("UPDATE users SET password = ? WHERE userid = ?");
+                $sql = $con->prepare("UPDATE users SET password = ? WHERE email = ?");
                 $arr = array($hash, $userid);
                 if ($sql->execute($arr) === TRUE)
                 {
                     echo '<script>alert("password updated!")</script>';
-                    echo '<script>window.location="../changedetails.php"</script>';
                 }
                 else
                 {
                     echo '<script>alert("password Not updated, Try again!")</script>';
-                    echo '<script>window.location="../changedetails.php"</script>';
                 }
                 $con = null;
             }

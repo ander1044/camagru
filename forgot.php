@@ -1,9 +1,10 @@
 <?php
 require("header.php");
+require("includes/recover_inc.php");
 ?>
 <main>
 <div class="container">
-<form action="includes/recover_inc.php" method="POST">
+<form  method="POST">
 <p>Recover Password</p>
 <hr>
 <input type="text" name="email" placeholder="email"required><br>

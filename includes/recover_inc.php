@@ -9,17 +9,20 @@ if (isset($_POST['forgot']))
 
     if (empty($email))
     {
-        header("Location: ../forgot.php?error=emptyfield");
+        echo '<script>alert("Invalid Email")</script>';
         exit();
     }
     elseif (!filter_var($email, FILTER_VALIDATE_EMAIL))
     {
-        header("Location: ../forgot.php?error=invalidemail");
+        echo '<script>alert("Invalid Email")</script>';
         exit ();
-    }    
+    }
+    else
+    {
+        $message = "copy the link and past it in your browser: ".$link;
+        mail($email, "email Recovery", $message);
+        echo '<script>alert("check your inbox. Follow the link sent to your email to change your password")</script>';
+        echo '<script>window.location = "login.php"<script>';
+    }
 }
-$message = "copy the link and past it in your browser: ".$link;
-mail($email, "email Recovery", $message);
-echo '<script>alert("check your inbox. Follow the link sent to your email to change your password")</script>';
-echo '<script>window.location = "../login.php"<script>';
 ?>

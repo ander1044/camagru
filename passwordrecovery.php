@@ -1,8 +1,10 @@
 <main>
 <?php
 $email = $_GET['id'];
-?> 
-<form action="includes/signup_inc.php?id=<?php echo $email?>" method="POST">
+require("includes/change.php");
+?>
+
+<form  method="POST">
 <p>Create new password</p>
 <input type="password" name="newpassword" placeholder="New Password"required><br>
 <input type="password" name="retypepassword" placeholder="Retype password"required><br>

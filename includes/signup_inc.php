@@ -1,13 +1,6 @@
 <?php
     include_once("connect.php");
-    function validPass($password)
-    {
-        if(strlen($password) >= 8){
-            if(!ctype_alpha($password) && !ctype_lower($password)){
-                return TRUE;
-            }
-        }
-    }
+   
     if (isset($_POST['signup']))
     {
         $email = $_POST['email'];
@@ -17,30 +10,25 @@
         $repassword = $_POST['repassword'];
         $gender = $_POST['gender'];
 
-        if (empty($email) || empty($fullname) 
-        || empty($username) || empty($password) || empty($repassword || empty($gender)))
+       
+        if ($password !== $repassword)
         {
-            header("Location: ../signup.php?error=emptyfields");
-            exit();
-        }
-        elseif ($password !== $repassword)
-        {
-            header("Location: ../signup.php?error=passwordnotmatching");
+            echo '<script>alert("Password Do not Match")</script>';
             exit();
         }
         elseif (!filter_var($email, FILTER_VALIDATE_EMAIL))
         {
-            header("Location: ../signup.php?error=invalidmail");
+            echo '<script>alert("Invalid Email")</script>';
             exit();
         }
         elseif (validPass($password) !== TRUE)
         {
-            header("Location: ../signup.php?error=invalidpassword");
+            echo '<script>alert("Password Does not meet minimum requirements")</script>';
             exit();
         }
         else if(!preg_match("/^[a-zA-Z ]*$/", $fullname))
         {
-            header("Location: ../signup.php?error=invalidnameformat");
+            echo '<script>alert("Fullname Incorrectly Structured")</script>';
             exit();
         }
         else
@@ -90,13 +78,11 @@
                 else
                 {
                     echo '<script>alert("Registration not Succesful. Please try again later")</script>';
-                    echo '<script>window.location="../signup.php"</script>';
                 }
                 }
                 else
                 {
                     echo '<script>alert("The email or username already exit in the system. Please try another one")</script>';
-                    echo '<script>window.location = "../signup.php"</script>';
                 }
                 $con = null;
             }
@@ -107,49 +93,4 @@
         }
     
     }
-
-    if (isset($_POST['update']))
-    {
-        $email = $_GET['id'];
-        $password = $_POST['newpassword'];
-        $conpass = $_POST['retypepassword'];
-    
-    if ($password !== $conpass)
-        {
-            header("Location: ../passwordrecovery.php?error=passwordnotmatching&id=".$email);
-            exit();
-        }
-        elseif (validPass($password) !== TRUE)
-        {
-            header("Location: ../passwordrecovery.php?error=invalidpassword&id=".$email);
-            exit();
-        }
-        else
-        {
-            try
-            {
-                $options = [ 'cost' =>12,];
-                $
-                $hash = password_hash($password, PASSWORD_BCRYPT, $options);
-                $sql = $con->prepare("UPDATE users SET password = ? WHERE email = ?");
-                $arr = array($hash, $email);
-                if ($sql->execute($arr) === TRUE)
-                {
-                    echo '<script>alert("password updated, Continue to login!")</script>';
-                    echo '<script>window.location="../login.php"</script>';
-                }
-                else
-                {
-                    echo '<script>alert("password Not updated, Try again!")</script>';
-                    echo '<script>window.location="../passwordrecovery.php?&id=".$email"</script>';
-                }
-                $con = null;
-            }
-            catch(PDOException $e)
-            {
-                echo "error".$e;
-            }
-        }
-    }
-    
 ?> 

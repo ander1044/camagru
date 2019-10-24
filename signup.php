@@ -1,5 +1,6 @@
 <?php
 require("header.php");
+require("includes/signup_inc.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,15 +13,15 @@ require("header.php");
 <body>
     <main>
 <div class="container">
-<form action = "includes/signup_inc.php" method  = "post">
+<form action = "#" method  = "post">
 <h1>Register</h1>
 <p>Create your account</p>
 <hr>
 <input type="text" name="email" placeholder="email" required><br>
 <input type="text" name="name" placeholder="Full Name" required><br>
-<input type="text" name="username" placeholder="Username"required><br>
-<input type="password" name="password" placeholder="Password"required><br>
-<input type="password" name="repassword" placeholder="Retype Password"required><br>
+<input type="text" name="username" placeholder="Username" required><br>
+<input type="password" name="password" placeholder="Password" required><br>
+<input type="password" name="repassword" placeholder="Retype Password" required><br>
 <input type="radio" name="gender" value="male">Male
 <input type="radio" name="gender" value="female">Female
 <input type="radio" name="gender" value="other">Other<br>
