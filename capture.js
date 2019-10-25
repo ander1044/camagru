@@ -18,9 +18,11 @@
     audio: false
   },
   function(stream){
-    video.srcObject = stream;
+   video.srcObject = stream;
    // video.src = vendorUrl.createObjectURL(stream);
-    video.play();
+    // video.play();
+   // video.stop();
+    //video.onpause();
   },
   function(error){
     //An error Occured
@@ -28,6 +30,11 @@
   });
   document.getElementById('capture').addEventListener('click', function(){
     context.drawImage(video, 0, 0, 400, 300);
+   
   });
-  
+  var button = document.getElementById('btn-download');
+button.addEventListener('click', function() {
+    var dataURL = canvas.toDataURL('image/png');
+    button.href = dataURL;
+});
 })();

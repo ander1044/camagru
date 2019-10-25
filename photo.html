@@ -5,17 +5,28 @@
       Webcam
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <script src="capture.js"></script>
+    
     <link rel="stylesheet" href="filters.css" />
   </head>
   <body>
     <div id="vid-controls">
-      <video id="vid-show" autoplay></video>
+      <!-- <video id="vid-show" autoplay></video>
       <input type="file" accept="image*/";capture=camera/>
       <input id="vid-take" type="button" value="Take Photo"/>
       <button id="filter-apply">Apply Filter</button>
-      <div id="vid-canvas"></div>
+      <div id="vid-canvas"></div> -->
+      <!-- <video id="video" controls="controls">
+        <source src=".mp4" /> -->
+    <!-- </video> -->
+    <video id="video" src="http://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" controls></video>
+<button onclick="capture()">Capture</button>
+<canvas id="canvas" style="overflow:auto"></canvas>
+     
+    <button id="capture">Capture</button>
+     
+    <div id="output"></div>
     </div>
+    <script src="pic.js"></script>
   </body>
 </html>
 fixime please
