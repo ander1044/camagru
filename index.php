@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -15,6 +14,7 @@ require("header.php");
 <?php
 require("upload_im.php");
 require("display.php");
+
 ?>    
 </body>
 </html>

@@ -10,7 +10,14 @@
         $repassword = $_POST['repassword'];
         $gender = $_POST['gender'];
 
-       
+        function validPass($password)
+        {
+            if(strlen($password) >= 8){
+                if(!ctype_alpha($password) && !ctype_lower($password)){
+                    return TRUE;
+                }
+            }
+        }
         if ($password !== $repassword)
         {
             echo '<script>alert("Password Do not Match")</script>';
@@ -33,7 +40,8 @@
         }
         else
         {
-            $pos = strpos($fullname, " ",0);
+            echo "sdfsd";
+            $pos = strpos($fullname, " ", 0);
             if ($pos > 0)
             {
                 $first = substr($fullname,0,$pos);
@@ -64,21 +72,21 @@
                     $sql = $con->prepare("INSERT INTO users (firstname, lastname, userid, password, gender, email, verified) 
                     VALUES (?,?,?,?,?,?,?)");
                     $arr = array($first, $second, $username, $hashing, $gender,$email, $ver);
-                if ($sql->execute($arr) === TRUE)
-                {
-                    $checker = bin2hex(random_bytes(10));
-                    $token = random_bytes(32);
-                    $link = "http:localhost:8080/camagru/includes/verify.php?checker=" .$checker. "&validator=" .bin2hex($token)."&id=".$username;
-                    $expiry = date("U") + 900;
-                    $message = "copy the link and past it in your browser: ".$link;
-                    mail($email,"Confirm your Email",$message);
-                    echo '<script>alert("Registered Successfully. Please check your email for a verification link")</script>';
-                    echo '<script>window.location="../login.php"</script>';
-                }
-                else
-                {
-                    echo '<script>alert("Registration not Succesful. Please try again later")</script>';
-                }
+                    if ($sql->execute($arr) === TRUE)
+                    {
+                        $checker = bin2hex(random_bytes(10));
+                        $token = random_bytes(32);
+                        $link = "http:localhost:8080/camagru/includes/verify.php?checker=" .$checker. "&validator=" .bin2hex($token)."&id=".$username;
+                        $expiry = date("U") + 900;
+                        $message = "copy the link and past it in your browser: ".$link;
+                        mail($email,"Confirm your Email",$message);
+                        echo '<script>alert("Registered Successfully. Please check your email for a verification link")</script>';
+                        echo '<script>window.location="login.php"</script>';
+                    }
+                    else
+                    {
+                        echo '<script>alert("Registration not Succesful. Please try again later")</script>';
+                    }
                 }
                 else
                 {

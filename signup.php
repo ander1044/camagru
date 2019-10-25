@@ -13,7 +13,7 @@ require("includes/signup_inc.php");
 <body>
     <main>
 <div class="container">
-<form action = "#" method  = "post">
+<form method  = "post">
 <h1>Register</h1>
 <p>Create your account</p>
 <hr>
