@@ -20,7 +20,7 @@
   function(stream){
    video.srcObject = stream;
    // video.src = vendorUrl.createObjectURL(stream);
-    // video.play();
+     video.play();
    // video.stop();
     //video.onpause();
   },
