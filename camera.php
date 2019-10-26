@@ -14,11 +14,12 @@ require("header.php");
     <section>
     <div class="booth">
         <video id="video" width="400" height="300" autoplay></video>
+        <!-- <a href="captured.php" class="button" id="capture">Take Photo</a> -->
         <input id="capture" type="button" value="Take Photo"/>
         <input id="filters" type="button" value="Add Filter"/>
         <input type="file" accept="image*/";capture=camera/>
-        <!-- <canvas id="canvas" width="400" height="300"></canvas>
-        <a href="#" class="button" id="btn-download" download="webcam.png" onclick"capture">Download</a> -->
+        <canvas id="canvas" width="400" height="300"></canvas>
+        <a href="#" class="button" id="btn-download" download="webcam.png" onclick"capture">Download</a>
       </div>
       <script src="capture.js"></script>
 </section>
