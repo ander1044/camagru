@@ -72,7 +72,7 @@ hr {
     margin-bottom: 25px;
 }
 
-input[type=submit] {
+input[type=submit], input[type=button] {
     background-color:  #4caf50;
     color: white;
     padding: 16px 20px;
@@ -93,4 +93,10 @@ a {
 .sign {
     background: #f1f1f1;
     text-align: center;
+}
+p{
+    height: 50px;
+    width:  50px;
+    margin-top: -1;
+    z-index: 1;
 }

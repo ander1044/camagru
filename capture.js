@@ -37,4 +37,32 @@ button.addEventListener('click', function() {
     var dataURL = canvas.toDataURL('image/png');
     button.href = dataURL;
 });
+
+  document.getElementById('btn-download').style.display = 'none';
+  // document.getElementById('retake').style.display = 'none';
+  document.getElementById('stickers').style.display = 'none';
+  document.getElementById('upload').style.display = 'none';
+  document.getElementById('caption').style.display = 'none';
+
+document.getElementById('capture').onclick = function(){ 
+  // alert('image captured');
+  document.getElementById('btn-download').style.display = 'block';
+  // document.getElementById('retake').style.display = 'block';
+  document.getElementById('stickers').style.display = 'block';
+  document.getElementById('upload').style.display = 'block';
+  document.getElementById('caption').style.display = 'block';
+  document.getElementById('video').style.display = 'none';
+  document.getElementById('video').style.display = 'none';
+  document.getElementById('capture').style.display = 'none';
+  
+}
+
+// document.getElementById('stickers').onclick = function(){
+//   var c = document.getElementById("canvas");
+//   var ctx = c.getContext("2d");
+//   var img = document.getElementById("st1");
+//   ctx.drawImage(img, 0, 0);
+
+// }
+
 })();
