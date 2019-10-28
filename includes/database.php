@@ -13,14 +13,12 @@ try{
 }
 catch(PDOException $e)
 {
-    echo $sql . "<br>" . $e->getMessage();
+    echo $sql . "<br>" . $e;
 }
 
 try{
-
     $conn = new PDO("mysql:host=$DB_DSN;dbname=$dbname", $DB_USER, $DB_PASSWORD);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
     $usertable = $conn->prepare("CREATE TABLE users(
         id INT(6) NOT NULL UNIQUE AUTO_INCREMENT,
         firstname VARCHAR(100),
@@ -46,5 +44,5 @@ try{
 }
 catch(PDOException $e)
 {
-    echo $usertable."<br>" . $e->getMessage();
+    echo $usertable."<br>" . $e;
 }

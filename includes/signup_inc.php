@@ -40,7 +40,6 @@
         }
         else
         {
-            echo "sdfsd";
             $pos = strpos($fullname, " ", 0);
             if ($pos > 0)
             {

@@ -1,5 +1,4 @@
 <body>
-
 <?php 
 include_once("includes/connect.php");
 session_start();
@@ -7,17 +6,16 @@ session_start();
     try
     {
         $x = 0;
-        $sql = $con->prepare("SELECT * FROM images");
+        $sql = $con->prepare("SELECT COUNT(`image`) AS amount FROM images");
         if ($sql->execute() === TRUE)
         {
             $res = $sql->setFetchMode(PDO::FETCH_ASSOC);
             foreach($sql->fetchAll() as $v)
                 {
-                         $x = $x + 1;   
+                         $c = $v;
                 }
-                echo  $x;
         }
-        $x = $x; 
+        $x = $c['amount'];
         if ($_SESSION['pos'] < $x)
         {
             if (isset($_POST['next']))
@@ -40,7 +38,8 @@ session_start();
                         if (empty($v) === FALSE)
                         {
                             ?>
-                            <img src = "<?php  echo $v['target']?>" alt = "<?php  echo $v['image']?>">
+                            <img src = "<?php  echo $v['target']?>" alt = "<?php  echo $v['image']?>" style = "width: 500px;height: 300px;display: block;">
+                            <span style = "width: 50px;height: 50px">&#9825;</span>
                             <?php
                         }
                     }
@@ -57,7 +56,6 @@ session_start();
     {
         echo $e;
     }
-
 ?>
 <hr>
 <form method = "post" action = "index.php">
