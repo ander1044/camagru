@@ -100,10 +100,10 @@ p{
     margin-top: -1;
     z-index: 1;
 }
-video{
+video, canvas{
     width: 100%;
 }
-.sticker-wrapper{
+/* .sticker-wrapper{
     position: relative;
 }
 .sticker-wrapper:before{
@@ -114,5 +114,32 @@ video{
     height: 90px;
     right: 1px;
     bottom: 1px;
+    opacity: 1.6;
+} */
+/* .sticker-wrapper{
+    position: relative;
+}
+.sticker-wrapper:before{
+    content: " ";
+    position: absolute;
+    background: url(../stickers/sticker3.png);
+    width: 117px;
+    height: 69px;
+    right: 309px;
+    bottom: 245px;
+    opacity: 3.6;
+} */
+
+.stk3{
+    position: relative;
+}
+.stk3:before{
+    content: " ";
+    position: absolute;
+    background: url(../stickers/sticker3.png);
+    width: 118px;
+    height: 69px;
+    right: -139px;
+    bottom: 160px;
     opacity: 1.6;
 }

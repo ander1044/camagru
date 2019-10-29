@@ -22,9 +22,9 @@ require("includes/upload.php");
         <input id="capture" type="button" value="Take Photo"/>
         
         <figure>
-          <canvas id="canvas" width="400" height="300">
+          <canvas id="canvas" width="400" height="300"> 
           </canvas>
-          
+          <img class="stk3" src=""/>
         <a href="#" id="btn-download" download="webcam.png" onclick"capture">Download</a>
         <input id="stickers" type="button" value="Add Stickers"/>
         <figcaption>

@@ -56,7 +56,7 @@ document.getElementById('capture').onclick = function(){
   document.getElementById('capture').style.display = 'none';
   
 }
-
+document.getElementsByClassName('stk3').style.display = 'none';
 // document.getElementById('stickers').onclick = function(){
 //   var c = document.getElementById("canvas");
 //   var ctx = c.getContext("2d");

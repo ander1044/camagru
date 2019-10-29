@@ -8,7 +8,10 @@ if (isset($_FILES['fileToUpload']))
     $tmpn =  getimagesize($_FILES['fileToUpload']['tmp_name']);
     $target = "../images/";
 
-    if (!empty($tmpn))
+    if (!preg_match("/\.(gif|jpg|png)$/i", $name)){
+        echo '<script>alert("invalid file type")</scipt>';
+    }
+    else if (!empty($tmpn))
     {
         move_uploaded_file($type, $target.$name);
         try
