@@ -1,6 +1,6 @@
 <?php
 // Function for converting GIFs and PNGs to JPG upon upload
-function ak_img_convert_to_jpg($target, $newcopy, $ext) {
+function ft_covert($target, $newcopy, $ext) {
     list($w_orig, $h_orig) = getimagesize($target);
     $ext = strtolower($ext);
     $img = "";
@@ -15,7 +15,7 @@ function ak_img_convert_to_jpg($target, $newcopy, $ext) {
 }
 // ----------------------- IMAGE WATERMARK FUNCTION -----------------------
 // Function for applying a PNG watermark file to a file after you convert the upload to JPG
-function ak_img_watermark($target, $sticker_file, $newcopy) { 
+function ft_sticker($target, $sticker_file, $newcopy) { 
     $sticker = imagecreatefrompng($sticker_file); 
     imagealphablending($sticker, false); 
     imagesavealpha($sticker, true); 
