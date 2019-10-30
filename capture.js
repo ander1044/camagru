@@ -30,13 +30,25 @@
   });
   document.getElementById('capture').addEventListener('click', function(){
     context.drawImage(video, 0, 0, 400, 300);
+    return new Promise((res, rej)=>{
+      canvas.toBlob(res, 'image/jpeg'); // request a Blob from the canvas
+    });
    
   });
-  var button = document.getElementById('btn-download');
-button.addEventListener('click', function() {
-    var dataURL = canvas.toDataURL('image/png');
-    button.href = dataURL;
-});
+  function download(blob){
+    // uses the <a download> to download a Blob
+    let a = document.createElement('a'); 
+    a.href = URL.createObjectURL(blob);
+    a.download = 'screenshot.jpg';
+    document.body.appendChild(a);
+    a.click();
+  }
+
+//   var button = document.getElementById('btn-download');
+// button.addEventListener('click', function() {
+//     var dataURL = canvas.toDataURL('image/png');
+//     button.href = dataURL;
+// });
 
   document.getElementById('btn-download').style.display = 'none';
   // document.getElementById('retake').style.display = 'none';
@@ -56,7 +68,7 @@ document.getElementById('capture').onclick = function(){
   document.getElementById('capture').style.display = 'none';
   
 }
-document.getElementsByClassName('stk3').style.display = 'none';
+// document.getElementsByClassName('stk3').style.display = 'none';
 // document.getElementById('stickers').onclick = function(){
 //   var c = document.getElementById("canvas");
 //   var ctx = c.getContext("2d");
