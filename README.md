@@ -6,3 +6,4 @@ Web project to Recreate a mini instagram
 * camera allows downloading captured image.
 * image canvas fixes in progress and filters
 * adding comments
+* breaking
