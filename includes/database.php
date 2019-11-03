@@ -2,7 +2,7 @@
 
 $DB_DSN = "localhost";
 $DB_USER = "root";
-$DB_PASSWORD = "197419ander";
+$DB_PASSWORD = "123456";
 $dbname = "camagru";
 try{
     $con = new PDO("mysql:host=$DB_DSN", $DB_USER, $DB_PASSWORD);
@@ -39,8 +39,15 @@ try{
         `target` VARCHAR(100) NOT NULL,
         `time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP )ENGINE = InnoDB"
     );
+    $likes = $conn->prepare("CREATE TABLE `likes` 
+    ( `id` INT NOT NULL AUTO_INCREMENT ,
+    `username` VARCHAR(100) NOT NULL ,
+    `imageid` VARCHAR(100) NOT NULL ,
+    PRIMARY KEY (`id`)) ENGINE = InnoDB;
+    ");
     $usertable->execute();
     $imagetable->execute();
+    $likes->execute();
     $conn = null;
 }
 catch(PDOException $e)

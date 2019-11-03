@@ -77,7 +77,7 @@
                     {
                         $checker = bin2hex(random_bytes(10));
                         $expiry = date("U") + 900;
-                        $message = '<a href ="http://localhost:8080/camagru/includes/verify.php?checker="'.$checker.'"&v="'.$tok.'">Click here to verify your account</a>';
+                        $message = '<a href ="http://localhost:8080/camagru/includes/verify.php?checker='.$checker.'&v='.$tok.'">Click here to verify your account</a>';
                         $headers  = 'MIME-Version: 1.0' . "\r\n";
                         $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
                         mail($email,"Confirm your Email",$message, $headers);
