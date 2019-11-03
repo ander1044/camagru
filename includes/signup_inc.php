@@ -68,17 +68,19 @@
                     ];
                     $hashing = password_hash($password, PASSWORD_BCRYPT, $options);
                     $ver = 0;
-                    $sql = $con->prepare("INSERT INTO users (firstname, lastname, userid, password, gender, email, verified) 
-                    VALUES (?,?,?,?,?,?,?)");
-                    $arr = array($first, $second, $username, $hashing, $gender,$email, $ver);
+                    $token = random_bytes(32);
+                    $tok = bin2hex($token);
+                    $sql = $con->prepare("INSERT INTO users (firstname, lastname, userid, password, gender, email, token, verified) 
+                    VALUES (?,?,?,?,?,?,?,?)");
+                    $arr = array($first, $second, $username, $hashing, $gender,$email,$tok,$ver);
                     if ($sql->execute($arr) === TRUE)
                     {
                         $checker = bin2hex(random_bytes(10));
-                        $token = random_bytes(32);
-                        $link = "http:localhost:8080/camagru/includes/verify.php?checker=" .$checker. "&validator=" .bin2hex($token)."&id=".$username;
                         $expiry = date("U") + 900;
-                        $message = "copy the link and past it in your browser: ".$link;
-                        mail($email,"Confirm your Email",$message);
+                        $message = '<a href ="http://localhost:8080/camagru/includes/verify.php?checker="'.$checker.'"&v="'.$tok.'">Click here to verify your account</a>';
+                        $headers  = 'MIME-Version: 1.0' . "\r\n";
+                        $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+                        mail($email,"Confirm your Email",$message, $headers);
                         echo '<script>alert("Registered Successfully. Please check your email for a verification link")</script>';
                         echo '<script>window.location="login.php"</script>';
                     }

@@ -27,6 +27,7 @@ try{
         `password` VARCHAR(100) NOT NULL,
         gender VARCHAR(10),
         email VARCHAR(100) UNIQUE,
+        token VARCHAR(100) NOT NULL,
         verified INT(2)
         )
     ");

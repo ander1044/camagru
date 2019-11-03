@@ -35,7 +35,6 @@ try
         $sql = $con->prepare("SELECT * FROM images ORDER BY `time` DESC LIMIT $pos, 5");
         if ($sql->execute() === TRUE)
         {
-            echo 'lucky';
             $res = $sql->setFetchMode(PDO::FETCH_ASSOC);    
             foreach($sql->fetchAll() as $v)
             {
