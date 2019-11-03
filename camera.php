@@ -15,6 +15,7 @@ require("includes/upload.php");
 <body>
     <div class="top-container">
     <video id="video" autoplay>Something went wrong while streaming</video>
+    <img src="" alt="" id="overlay" style="position:absolute;bottom:558px;width:200px;height:265px;">
     <button id="capture">
     Take Picture
     </button>
@@ -26,6 +27,18 @@ require("includes/upload.php");
     <option value="hue-rotate(90deg)">Hue</option>
     <option value="invert(100%)">Invert</option>
     <option value="contrast(200%)">contrast</option>
+    </select>
+    <select id="stickers">
+    <option value="none">Default</option>
+    <option value="./stickers/sticker1.png">Greentoon</option>
+    <option value="./stickers/sticker2.png">Linkedin</option>
+    <option value="./stickers/sticker3.png">Jordan</option>
+    <option value="./stickers/sticker4.png">Google Store</option>
+    <option value="./stickers/sticker5.png">Hippy</option>
+    <option value="./stickers/sticker7.png">Linux</option>
+    <option value="./stickers/sticker8.png">Linux Drunk</option>
+    
+    </select>
     </select>
     <button id="clear">Clear</button>
     <canvas id="canvas"></canvas>
