@@ -143,3 +143,5 @@ video, canvas{
     bottom: 160px;
     opacity: 1.6;
 }
+canvas{display: none;
+}

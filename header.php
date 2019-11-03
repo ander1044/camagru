@@ -9,7 +9,7 @@
             <nav>
                 <a href="login.php" class="logo">THE_GRAM</a>
                 <div class = "header_right">
-                            <a class="main" href="index.php">Home</a>
+                            <a class="main" href="home.php">Home</a>
                             <a class="#about" href="#">About</a>
                             <a class="#login" href="login.php">Signin</a>
                             <a class="#signup" href="signup.php">Signup</a>
