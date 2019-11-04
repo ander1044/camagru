@@ -3,34 +3,34 @@
 require ("header.php");
 ?>
 <body>
-    <form method = "POST" enctype="multipart/form-data">
+    <form method = "POST" action="./home.php" enctype="multipart/form-data">
     <textarea name="content" id="" rows="4" placeholder="What's on your mind,<?php echo $username."?" ?>"></textarea><br>
-     <label >Select Image
-    <input type = "file" name="fileToUpload" id="fileToUpload" size="30">
-</label>   
-<input type="submit" value="Upload Image" name="submit">
+    <label >Select Image
+        <input type = "file" name="fileToUpload" id="fileToUpload" size="30">
+    </label>   
+    Select Sticker
+    <select name="stickers" id="stickers">
+        <option value="none">Default</option>
+        <option value="./stickers/sticker1.png">Greentoon</option>
+        <option value="./stickers/sticker2.png">Linkedin</option>
+        <option value="./stickers/sticker3.png">Jordan</option>
+        <option value="./stickers/sticker4.png">Google Store</option>
+        <option value="./stickers/sticker5.png">Hippy</option>
+        <option value="./stickers/sticker7.png">Linux</option>
+        <option value="./stickers/sticker8.png">Linux Drunk</option>
+    </select>
+    <input type="submit" value="Upload Image" name="submit">
     </form>
-    <?php
+<?php
 if(!isset($_FILES["fileToUpload"]))
 {
-	echo "Error";
+    echo "Error";
 	exit;
 }
 $target_dir = "images/";
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
 $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
-
-if(isset($_POST["submit"])) {
-    $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-    if($check !== false) {
-       
-        $uploadOk = 1;
-    } else {
-        echo "File is not an image.";
-        $uploadOk = 0;
-    }
-}
 
 if ($_FILES["fileToUpload"]["size"] > 500000) {
     echo "Sorry, your file is too large.";
@@ -45,19 +45,31 @@ if($imageFileType != "jpg" && $imageFileType != "jpeg") {
 if ($uploadOk == 0) {
     echo "<br>Sorry, your file was not uploaded.";
 	exit;
-
+    
 } else {
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
         echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
     } else {
         echo "<br>Sorry, there was an error uploading your file.";
-	exit;
+        exit;
     }
 }
 ?>
 <?php
-
-$stamp = imagecreatefrompng('stickers/sticker3.png');
+if(isset($_POST['submit'])) 
+{
+    $selected = $_POST["stickers"];
+    $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+    if($check !== false) {
+        
+        $uploadOk = 1;
+    } else {
+        echo "File is not an image.";
+        $uploadOk = 0;
+    }
+}
+//var_dump ($selected);
+$stamp = imagecreatefrompng($selected);
 $im = imagecreatefromjpeg($target_file);
 if(imagesx($im)<500 || imagesy($im) <500)
 {
