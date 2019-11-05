@@ -21,22 +21,18 @@
         if ($password !== $repassword)
         {
             echo '<script>alert("Password Do not Match")</script>';
-            exit();
         }
         elseif (!filter_var($email, FILTER_VALIDATE_EMAIL))
         {
-            echo '<script>alert("Invalid Email")</script>';
-            exit();
+            echo '<script>alert("Invalid Email")</script>'; 
         }
         elseif (validPass($password) !== TRUE)
         {
             echo '<script>alert("Password Does not meet minimum requirements")</script>';
-            exit();
         }
         else if(!preg_match("/^[a-zA-Z ]*$/", $fullname))
         {
             echo '<script>alert("Fullname Incorrectly Structured")</script>';
-            exit();
         }
         else
         {
@@ -70,13 +66,13 @@
                     $ver = 0;
                     $token = random_bytes(32);
                     $tok = bin2hex($token);
-                    $sql = $con->prepare("INSERT INTO users (firstname, lastname, userid, password, gender, email, token, verified) 
-                    VALUES (?,?,?,?,?,?,?,?)");
-                    $arr = array($first, $second, $username, $hashing, $gender,$email,$tok,$ver);
-                    if ($sql->execute($arr) === TRUE)
+                    $sql = $con->prepare("INSERT INTO users (firstname, lastname, userid, password, gender, email, verified) VALUES (?,?,?,?,?,?,?)");
+                    $sql2 = $con->prepare("INSERT INTO token_t (userid, token, expire) VALUES (?,?,NOW() + INTERVAL 1 HOUR)");
+                    $arr = array($first, $second, $username, $hashing, $gender,$email,$ver);
+                    $arr2 = array($username, $tok);
+                    if ($sql2->execute($arr2) === TRUE && $sql->execute($arr) === TRUE)
                     {
                         $checker = bin2hex(random_bytes(10));
-                        $expiry = date("U") + 900;
                         $message = '<a href ="http://localhost:8080/camagru/includes/verify.php?checker='.$checker.'&v='.$tok.'">Click here to verify your account</a>';
                         $headers  = 'MIME-Version: 1.0' . "\r\n";
                         $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";

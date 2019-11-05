@@ -1,31 +1,32 @@
 <?php
 
-    include_once("connect.php");
-
-    $user = $_GET['v'];
-    try 
-    {
-        $sql = $con->prepare("SELECT * FROM users WHERE token = ?");
+try 
+{
+        include_once("connect.php");
+        $user = $_GET['v'];
+        
+        $sql = $con->prepare("SELECT userid FROM token_t WHERE token = ?");
         $sql->execute([$user]);
 
-        $res = $sql->setFetchMode(PDO::FETCH_ASSOC); 
+        $res = $sql->fetchAll();
+         
+        $userid = ($res[0]['userid']);
+
+        if (!empty($userid))
         {
-            foreach ($sql->fetchAll() as $v)
+            $update = $con->prepare("UPDATE users SET verified = 1 WHERE userid = ? AND verified = 0");
+            if ($update->execute([$userid]) === TRUE)
             {
-                $ver = $v;
-            }
-            if ($ver['verified'] == 0)
-            {
-                $update = $con->prepare("UPDATE users SET verified = 1 WHERE token = ?");
-                if ($update->execute([$user]) === TRUE)
+                $del = $con->prepare("DELETE FROM token_t WHERE token = '$user'");
+                if ($del->execute())
                 {
                     echo "email verified";
                 }
             }
-            else
-            {
-                echo "email already verified";
-            }
+        }
+        else
+        {
+            echo "email already verified";
         }
         $con = null;
     }

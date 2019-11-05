@@ -45,9 +45,17 @@ try{
     `imageid` VARCHAR(100) NOT NULL ,
     PRIMARY KEY (`id`)) ENGINE = InnoDB;
     ");
+    $tok = $conn->prepare("CREATE TABLE `token_t` ( `id` INT NOT NULL AUTO_INCREMENT ,
+    `userid` VARCHAR(100) NOT NULL ,
+    `token` VARCHAR(100) NOT NULL ,
+    `expire` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+    PRIMARY KEY (`id`)) ENGINE = InnoDB;
+    ");
+
     $usertable->execute();
     $imagetable->execute();
     $likes->execute();
+    $tok->execute();
     $conn = null;
 }
 catch(PDOException $e)

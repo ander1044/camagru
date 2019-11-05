@@ -1,8 +1,8 @@
 <?php
 session_start();
-include_once("connect.php");
-    if (isset($_POST['email_change']))
-    {
+if (isset($_POST['email_change']))
+{
+    include_once("connect.php");
         
         $change = $_POST['email'];
         $userid = $_SESSION['login'];
@@ -45,18 +45,18 @@ include_once("connect.php");
                 }
             }
         }
-        $userid = $_GET['id'];
+        $userid = $_GET['v'];
         $password = $_POST['newpassword'];
         $conpass = $_POST['retypepassword'];
         
         
-        if ($password !== $conpass)
+        if (strcmp($password, $conpass))
         {
-            exit();
+            echo '<script>alert("Passwords not the same!")</script>';
         }
         elseif (validPass($password) !== TRUE)
         {
-            exit();
+            echo '<script>alert("Password did not meet minimun complexity!")</script>';
         }
         else
         {
@@ -64,17 +64,31 @@ include_once("connect.php");
             {
                 $userid = $_SESSION['email'];
             }
-            echo $userid;
-           
             try
             {
+                include_once("connect.php");
+                $sql = $con->prepare("SELECT userid FROM token_t WHERE token = ?");
+                $sql->execute([$userid]);
+                
+                $res = $sql->fetchAll();
+                
+                $useridd = ($res[0]['userid']);
+
+                if (!empty($useridd))
+                {
+                    $userid = $useridd;
+                }
                 $options = [ 'cost' =>12,];
                 $hash = password_hash($password, PASSWORD_BCRYPT, $options);
                 $sql = $con->prepare("UPDATE users SET password = ? WHERE email = ?");
                 $arr = array($hash, $userid);
                 if ($sql->execute($arr) === TRUE)
                 {
-                    echo '<script>alert("password updated!")</script>';
+                    $del = $con->prepare("DELETE FROM token_t WHERE token = '$user'");
+                    if ($del->execute())
+                    {
+                        echo '<script>alert("password updated!")</script>';
+                    } 
                 }
                 else
                 {

@@ -1,8 +1,6 @@
 <?php
 require("includes/change.php");
-//require("");
 $email = $_SESSION['email'];
-echo $email;
 ?>
 <body>
     <form method = "POST">
