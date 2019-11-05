@@ -1,3 +1,4 @@
+
 let width = 500,
     height = 0,
     filter = 'none',
@@ -10,7 +11,7 @@ let width = 500,
   const thumbnail = document.getElementById('thumbnail');
   const addfilter = document.getElementById('filters');
   const clear = document.getElementById('clear');
-  //const sticker = document.getElementById('stickers'); 
+  //const addsticker = document.getElementById('stickers'); 
 
   navigator.mediaDevices.getUserMedia({video: true, audio: false})
   
@@ -52,12 +53,23 @@ let width = 500,
    e.preventDefault(); 
   });
 
+  // addsticker.addEventListener('change', function(e)
+  // {
+  //  sticker = e.target.value;
+  //  overlay.src = sticker;
+  //  e.preventDefault(); 
+  // });
+
   clear.addEventListener('click', function(e)
   {
     thumbnail.innerHTML = '';
+    addsticker.innerHTML = '';
     filter = 'none';
+   // sticker = 'none';
     video.style.filter = filter;
+   // overlay.src = sticker;
     addfilter.selectedIndex = 0;
+  //  addsticker.selectedIndex = 0;
   }
   )
 
@@ -70,12 +82,17 @@ let width = 500,
       canvas.height = height;
       context.drawImage(video, 0, 0, width, height);
 
-      const imgUrl = canvas.toDataURL('image/png');
-      //console.log(imgUrl);
+      const imgUrl = canvas.toDataURL('image/jpeg');
+      console.log(imgUrl);
       const image = document.createElement('img');
       image.setAttribute('src', imgUrl);
       image.style.filter = filter;
+      //image.overlay.src = sticker;
       thumbnail.appendChild(image);
+      
+      document.getElementById("url").value = imgUrl;
+      //document.write(imgUrl);
       
     }
   }
+  
