@@ -57,32 +57,43 @@ require("includes/upload.php");
 if (isset($_POST['apply']))
 {
   $selected = $_POST["stickers"];
-  $target = $_POST["url"]; 
+  $target = $_POST["url"];
 
-  //echo "<img src =$target>";
-  //die();
+  
+  
+  $image = "output".date('Y-m-dH-i-s').".jpeg";
+  imagejpeg(imagecreatefromstring(file_get_contents($target)), "images/".$image);
+
+  
+  $im = imagecreatefromjpeg("images/".$image);
   $stamp = imagecreatefrompng($selected);
   
-  $image = "images/output".date('Y-m-dH-i-s').".jpeg";
-  imagejpeg(imagecreatefromstring(file_get_contents($target)), $image);
+  //die();
   
-  $image = imagecreatefromjpeg($image);
- 
+  
   $marge_right = 10;
   $marge_bottom = 10;
   $sx = imagesx($stamp);
   $sy = imagesy($stamp);
-
-  imagecopy($image, $stamp, 0, imagesy($im) - $sy - $marge_bottom, 0, 0, imagesx($stamp), imagesy($stamp));
-
+  
+  //echo $im;
+  //die();
+  
+  imagecopy($im, $stamp, 0, imagesy($im) - $sy - $marge_bottom, 0, 0, imagesx($stamp), imagesy($stamp));
+  
   //$date = new DateTime();
   //rename($target, "image" . $date->format('Y-m-d H:i:sP') . ".jpg");
   
   
-  echo "<img src=$image >";
-  // $out="uploads/".$target;
-  // imagejpeg($im,$out);
-  // imagedestroy($im);
+  $out="images/".$image;
+
+  
+  imagejpeg($im,$out);
+  imagedestroy($im);
+  
+ // die();
+  echo "<img src=$out >";
+
 }
 ?>
 </body>
