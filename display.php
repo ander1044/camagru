@@ -78,7 +78,7 @@ try
                             }
                         }
 
-                        $try = $con->prepare("SELECT userid, comments FROM comments WHERE userid = ? AND imageid = ?");
+                        $try = $con->prepare("SELECT userid, comments FROM comments");
                         $a = array($_SESSION['login'], $v['imageid']);
                         if ($try->execute($a) === TRUE)
                         {
@@ -88,9 +88,7 @@ try
                                <h5>
                                <?php echo $com["userid"]?>
                                </h5>
-                               
                                    <?php echo $com["comments"]?>
-                               
                                <?php
                            }
                         }
