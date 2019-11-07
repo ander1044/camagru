@@ -52,7 +52,7 @@
                 $select = $con->prepare("SELECT * FROM users WHERE email = ? OR userid = ?");
                 $array = array($email, $username);
                 $select->execute($array);
-                $res = $select->fetchAll;
+                $res = $select->fetchAll();
                 
                 if (empty($res))
                 {
