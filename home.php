@@ -67,11 +67,10 @@ if(isset($_POST['submit']))
         echo "File is not an image.";
         $uploadOk = 0;
     }
-}
-//var_dump ($selected);
+
 $stamp = imagecreatefrompng($selected);
 $im = imagecreatefromjpeg($target_file);
-if(imagesx($im)<500 || imagesy($im) <500)
+if(imagesx($im)<10 || imagesy($im) <10)
 {
 	echo "image size too low";
 	exit;
@@ -87,6 +86,9 @@ $out="uploads/".$_FILES["fileToUpload"]["name"];
 imagejpeg($im,$out);
 imagedestroy($im);
 echo "<img src=$out >";
+}
+//var_dump ($selected);
+
 
 ?>
 

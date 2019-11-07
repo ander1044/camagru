@@ -30,7 +30,7 @@ require("includes/upload.php");
     </select>
 
     <form method = "POST" >
-    <select id="stickers">
+    <select name="stickers" id="stickers">
     <option value="none">Default</option>
     <option value="./stickers/sticker1.png">Greentoon</option>
     <option value="./stickers/sticker2.png">Linkedin</option>
@@ -62,23 +62,27 @@ if (isset($_POST['apply']))
   //echo "<img src =$target>";
   //die();
   $stamp = imagecreatefrompng($selected);
-  $im = imagecreatefromjpeg($target);
-  if(imagesx($im)<200 || imagesy($im) <200)
-  {
-	  echo "image size too low";
-	  exit;
-  }
+  
+  $image = "images/output".date('Y-m-dH-i-s').".jpeg";
+  imagejpeg(imagecreatefromstring(file_get_contents($target)), $image);
+  
+  $image = imagecreatefromjpeg($image);
+ 
   $marge_right = 10;
   $marge_bottom = 10;
   $sx = imagesx($stamp);
   $sy = imagesy($stamp);
 
-  imagecopy($im, $stamp, 0, imagesy($im) - $sy - $marge_bottom, 0, 0, imagesx($stamp), imagesy($stamp));
+  imagecopy($image, $stamp, 0, imagesy($im) - $sy - $marge_bottom, 0, 0, imagesx($stamp), imagesy($stamp));
 
-  $out="uploads/".$target;
-  imagejpeg($im,$out);
-  imagedestroy($im);
-  echo "<img src=$out >";
+  //$date = new DateTime();
+  //rename($target, "image" . $date->format('Y-m-d H:i:sP') . ".jpg");
+  
+  
+  echo "<img src=$image >";
+  // $out="uploads/".$target;
+  // imagejpeg($im,$out);
+  // imagedestroy($im);
 }
 ?>
 </body>
