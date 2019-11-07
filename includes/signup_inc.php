@@ -52,12 +52,9 @@
                 $select = $con->prepare("SELECT * FROM users WHERE email = ? OR userid = ?");
                 $array = array($email, $username);
                 $select->execute($array);
-                $res = $select->setFetchmode(PDO::FETCH_ASSOC);
-                foreach($select->fetchAll() as $v)
-                {
-                    $arr = $v;
-                }
-                if (empty($v))
+                $res = $select->fetchAll;
+                
+                if (empty($res))
                 {
                     $options = [
                     'cost' => 12,
@@ -73,10 +70,14 @@
                     if ($sql2->execute($arr2) === TRUE && $sql->execute($arr) === TRUE)
                     {
                         $checker = bin2hex(random_bytes(10));
+
                         $message = '<a href ="http://localhost:8080/camagru/includes/verify.php?checker='.$checker.'&v='.$tok.'">Click here to verify your account</a>';
+                        
                         $headers  = 'MIME-Version: 1.0' . "\r\n";
                         $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+
                         mail($email,"Confirm your Email",$message, $headers);
+
                         echo '<script>alert("Registered Successfully. Please check your email for a verification link")</script>';
                         echo '<script>window.location="login.php"</script>';
                     }

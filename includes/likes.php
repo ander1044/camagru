@@ -35,4 +35,19 @@ if(isset($_POST['like']))
     }
     $con = null;
 }
+
+if (isset($_POST['commet']))
+{
+    $id = $_POST['id'];
+    $comment = $_POST['comment'];
+
+    if (empty($comment))
+    {
+        echo '<script>alert("No Comment")</script>';
+    }
+    else
+    {
+        
+    }
+}
 ?>

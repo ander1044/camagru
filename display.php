@@ -60,7 +60,8 @@ try
                     </div>
                     <div class ="">
                         <form method = "post">
-                            <textarea name = "id" placeholder ="comments"></textarea>
+                            <textarea name = "comment" placeholder ="comments"></textarea>
+                            <input type = "hidden" name = "id" value = "<?php echo $v['imageid']?>">
                             <button name = "commet">Comment</button>
                         </form>
                     </div>
