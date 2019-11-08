@@ -29,7 +29,7 @@
     <option value="./stickers/sticker7.png">Linux</option>
     <option value="./stickers/sticker8.png">Linux Drunk</option>
     
-   <input type = "hidden" id = "url" name = "url"> </p>
+   <input type = "hidden" id = "url" name = "url"> 
    <input type ="submit" name = "apply" value  = "Apply">
     </select>
     </form>
@@ -39,51 +39,68 @@
     <div class="bottom-container">
     <div id="thumbnail"></div>
     </div>
-  
-  
-  
+   
 <?php
+
+session_start();
+$target = $_SESSION['url'];
+$image = "output".date('Y-m-dH-i-s').".jpeg";
+imagejpeg(imagecreatefromstring(file_get_contents($target)), "uploads/".$image);
+echo '<img src = "uploads/'.$image.'">'; 
+
 if (isset($_POST['apply']))
 {
   $selected = $_POST["stickers"];
-  $target = $_POST["url"];
-
-  
-  
-  $image = "output".date('Y-m-dH-i-s').".jpeg";
-  imagejpeg(imagecreatefromstring(file_get_contents($target)), "uploads/".$image);
-
-  
+   
   $im = imagecreatefromjpeg("uploads/".$image);
   $stamp = imagecreatefrompng($selected);
-  
-  //die();
-  
-  
+   
   $marge_right = 10;
   $marge_bottom = 10;
   $sx = imagesx($stamp);
   $sy = imagesy($stamp);
-  
-  //echo $im;
-  //die();
-  
-  imagecopy($im, $stamp, 0, imagesy($im) - $sy - $marge_bottom, 0, 0, imagesx($stamp), imagesy($stamp));
-  
-  //$date = new DateTime();
-  //rename($target, "image" . $date->format('Y-m-d H:i:sP') . ".jpg");
-  
-  
-  $out="uploads/".$image;
 
+  imagecopy($im, $stamp, 0, imagesy($im) - $sy - $marge_bottom, 0, 0, imagesx($stamp), imagesy($stamp));
+
+  $out="uploads/".$image;
   
   imagejpeg($im,$out);
   imagedestroy($im);
-  
- // die();
-  echo "<img src=$out >";
 
+  $_SESSION['url'] = $out;
+  echo '<script>window.location= "discam.php?"</script>';
 }
 ?>
+
+<form method = "POST">
+        <input type ="hidden" name = "url">
+        <input type  = "submit" name = "upload">
+</form>
 </body>
 </html>
+
+<?php
+
+if (isset($_POST['upload']))
+{
+  $target = "images/";
+  $name = $_SESSION['url'];
+
+  move_uploaded_file($name, $target.$name);
+
+        try
+        {
+            $sql = $con->prepare("INSERT INTO images (userid, `description`, `image`, `target`, `time`) VALUES(?,?,?,?,now())");
+            $arr = array($_SESSION['login'],"",$name, "images/".$name);
+            if ($sql->execute($arr) === TRUE)
+            {
+                echo '<script>alert("Image added succesfully")</script>';
+                echo '<script>window.location = "index.php"</script>';
+            }
+        }
+        catch(PDOException $e)
+        {
+            echo $e;
+        }
+}
+?>

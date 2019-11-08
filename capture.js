@@ -60,18 +60,18 @@ let width = 500,
   //  e.preventDefault(); 
   // });
 
-  clear.addEventListener('click', function(e)
-  {
-    thumbnail.innerHTML = '';
-    addsticker.innerHTML = '';
-    filter = 'none';
-   // sticker = 'none';
-    video.style.filter = filter;
-   // overlay.src = sticker;
-    addfilter.selectedIndex = 0;
-  //  addsticker.selectedIndex = 0;
-  }
-  )
+  // clear.addEventListener('click', function(e)
+  // {
+  //   thumbnail.innerHTML = '';
+  //   addsticker.innerHTML = '';
+  //   filter = 'none';
+  //  // sticker = 'none';
+  //   video.style.filter = filter;
+  //  // overlay.src = sticker;
+  //   addfilter.selectedIndex = 0;
+  // //  addsticker.selectedIndex = 0;
+  // }
+  // )
 
   function captureImage()
   {
@@ -96,16 +96,21 @@ let width = 500,
       //image.overlay.src = sticker;
       thumbnail.appendChild(image);
 
-      window.location = "discam.php";
-      
+      var queryString = "?p=" + imgUrl;
+   //   window.location = "discam.php" + queryString;
       document.getElementById("url").value = imgUrl;
+     // document.getElementById("url").value = window.location.search;
 
-      alert("dfgdfgfd");
+    //  alert("dfgdfgfd");
       //document.write(imgUrl);
 
-      
+  
+      video.srcObject = stream;
+      video.pause();
+      //  vid.pause();
+       // vid.src = "";
+       // localstream.stop();
+     
     }
-    
-   
   }
   

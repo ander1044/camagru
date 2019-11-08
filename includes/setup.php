@@ -8,8 +8,6 @@ try{
     $sql = $con->prepare("CREATE DATABASE camagru");
     $sql->execute();
     $con = null;
-    $conn = new PDO("mysql:host=$DB_DSN;dbname=$dbname", $DB_USER, $DB_PASSWORD);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 }
 catch(PDOException $e)
 {
@@ -17,6 +15,8 @@ catch(PDOException $e)
 }
 
 try{
+    $conn = new PDO("mysql:host=$DB_DSN;dbname=$dbname", $DB_USER, $DB_PASSWORD);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
     $usertable = $conn->prepare("CREATE TABLE users(
         id INT(6) NOT NULL UNIQUE AUTO_INCREMENT,
@@ -26,7 +26,6 @@ try{
         `password` VARCHAR(100) NOT NULL,
         gender VARCHAR(10),
         email VARCHAR(100) UNIQUE,
-        token VARCHAR(100) NOT NULL,
         verified INT(2)
         )
     ");
@@ -50,14 +49,13 @@ try{
     `expire` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id`)) ENGINE = InnoDB;
     ");
-    $comment = $con->prepare("CREATE TABLE comments (
+    $comment = $conn->prepare("CREATE TABLE comments (
         id INT NOT NULL AUTO_INCREMENT ,
         `imageid` VARCHAR(100) NOT NULL ,
         `userid` VARCHAR(100) NOT NULL ,
         `comments` VARCHAR(2000) NOT NULL ,
         PRIMARY KEY (`id`)) ENGINE = InnoDB; "
     );
-
     $imagetable->execute();
     $usertable->execute();
     $comment->execute();
