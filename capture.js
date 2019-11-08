@@ -75,24 +75,37 @@ let width = 500,
 
   function captureImage()
   {
+    
+    navigator.mediaDevices.getUserMedia({video: false, audio: false})
     const context = canvas.getContext('2d');
+   
     if (width && height)
     {
       canvas.width = width;
       canvas.height = height;
       context.drawImage(video, 0, 0, width, height);
 
-      const imgUrl = canvas.toDataURL('image/jpeg');
+     
+      const imgUrl = canvas.toDataURL('uploads/jpeg');
       console.log(imgUrl);
       const image = document.createElement('img');
       image.setAttribute('src', imgUrl);
-      image.style.filter = filter;
+
+       
+    //  image.style.filter = filter;
       //image.overlay.src = sticker;
       thumbnail.appendChild(image);
+
+      window.location = "discam.php";
       
       document.getElementById("url").value = imgUrl;
+
+      alert("dfgdfgfd");
       //document.write(imgUrl);
+
       
     }
+    
+   
   }
   

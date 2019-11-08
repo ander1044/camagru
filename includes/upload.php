@@ -6,7 +6,7 @@ if (isset($_FILES['fileToUpload']))
     $name = $_FILES['fileToUpload']['name'];
     $type = $_FILES['fileToUpload']['tmp_name'];
     $tmpn =  getimagesize($_FILES['fileToUpload']['tmp_name']);
-    $target = "../images/";
+    $target = "images/";
 
     if (!preg_match("/\.(gif|jpg|png)$/i", $name)){
         echo '<script>alert("invalid file type")</scipt>';

@@ -2,8 +2,6 @@
 <?php 
 include_once("includes/connect.php");
 require("includes/likes.php");
-
-session_start();
 try
 {
     $x = 0;
@@ -17,11 +15,12 @@ try
         }
     }
     $x = $c['amount'];
+    //$_SESSION['pos'] = 0;
     if (empty($_SESSION['pos']))
     {
         $_SESSION['pos'] = 0;
     }
-    if ($_SESSION['pos'] < $x || $x === 0)
+    if ($_SESSION['pos'] <= $x)
     {
         if (isset($_POST['next']))
         {
@@ -49,14 +48,52 @@ try
                     if ($like->execute([$v['imageid']]))
                     {
                         $res = $like->fetchAll();
-                        echo "number of likes: ".$res[0][co];
+                        echo "number of likes: ".$res[0]["co"];
                     }
                     ?>
                     <div class = "">
-                        <form method = "post">
+                        <?php
+                        $try = $con->prepare("SELECT id FROM likes WHERE username = ? AND imageid = ?");
+                        $a = array($_SESSION['login'], $v['imageid']);
+                        if ($try->execute($a) === TRUE)
+                        {
+                           $res = $try->fetchAll();
+                           if (empty($res))
+                           {
+                               ?>
+                            <form method = "post">
                             <input type = "hidden" name = "id" value = "<?php echo $v['imageid']?>">
                             <button name = "like">like</button>
                         </form>
+                            <?php
+                            }
+                        else
+                            {   
+                                ?>
+                                <form method = "post">
+                                <input type = "hidden" name = "id" value = "<?php echo $v['imageid']?>">
+                                <button name = "like">unlike</button>
+                            </form>
+                                <?php
+                            }
+                        }
+
+                        $try = $con->prepare("SELECT userid, comments FROM comments");
+                        $a = array($_SESSION['login'], $v['imageid']);
+                        if ($try->execute($a) === TRUE)
+                        {
+                           foreach($try->fetchAll() as $com)
+                           {
+                               ?>
+                               <h5>
+                               <?php echo $com["userid"]?>
+                               </h5>
+                                   <?php echo $com["comments"]?>
+                               <?php
+                           }
+                        }
+                        ?>
+                        
                     </div>
                     <div class ="">
                         <form method = "post">

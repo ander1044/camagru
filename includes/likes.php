@@ -1,5 +1,4 @@
 <?php
-session_start();
 
 if(isset($_POST['like']))
 {
@@ -47,7 +46,20 @@ if (isset($_POST['commet']))
     }
     else
     {
+        include_once('connect.php');
+
+    try{
         
+        $sql = $con->prepare("INSERT INTO comments (userid, imageid, comments) values (?,?,?)");
+        $arr = array($_SESSION['login'], $id, $comment);
+        $sql->execute($arr);
+        echo '<script>window.location="index.php"</script>';
+    }
+    catch(PDOException $e)
+    {
+        echo $e;
+    }
+    $con = null;
     }
 }
 ?>
