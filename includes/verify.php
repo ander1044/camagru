@@ -2,6 +2,7 @@
 
 try 
 {
+
         include_once("connect.php");
         $user = $_GET['v'];
         
