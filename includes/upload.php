@@ -1,19 +1,25 @@
 <?php
-session_start();
-include_once("connect.php");
-if (isset($_FILES['fileToUpload']))
-{
-    $name = $_FILES['fileToUpload']['name'];
-    $type = $_FILES['fileToUpload']['tmp_name'];
-    $tmpn =  getimagesize($_FILES['fileToUpload']['tmp_name']);
-    $target = "images/";
-
-    if (!preg_match("/\.(gif|jpg|png)$/i", $name)){
-        echo '<script>alert("invalid file type")</scipt>';
-    }
-    else if (!empty($tmpn))
+ session_start();
+// if (isset($_FILES['fileToUpload']))
+// {
+    // $name = $_FILES['fileToUpload']['name'];
+    // $type = $_FILES['fileToUpload']['tmp_name'];
+    // $tmpn =  getimagesize($_FILES['fileToUpload']['tmp_name']);
+    
+    function upload($name)
     {
-        move_uploaded_file($type, $target.$name);
+    include_once("connect.php");
+
+    //echo "asdasd";
+    //die();
+     $target = "images/";
+
+    // if (!preg_match("/\.(gif|jpg|png)$/i", $name)){
+    //     echo '<script>alert("invalid file type")</scipt>';
+    // }
+    // else if (!empty($tmpn))
+    // {
+        move_uploaded_file($name, $target.$name);
         try
         {
             $sql = $con->prepare("INSERT INTO images (userid, `description`, `image`, `target`, `time`) VALUES(?,?,?,?,now())");
@@ -29,9 +35,10 @@ if (isset($_FILES['fileToUpload']))
             echo $e;
         }
     }
-    else
-    {
-        echo '<script>alert("invalid image Selected")</script>';
-    }
-}
+//     }
+//     else
+//     {
+//         echo '<script>alert("invalid image Selected")</script>';
+//     }
+// }
 ?>
