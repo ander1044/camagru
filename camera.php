@@ -32,13 +32,16 @@ require("includes/upload.php");
 
     <?php
     
-    session_start();
+  //  session_start();
     if (isset($_POST["sub"]))
     {
 
       $_SESSION['url'] = $_POST["url"];
 
-      echo $_SESSION['url'];
+   //   echo $_SESSION['url'];
+     // require 'discam.php';
+     // dis();
+     $_SESSION['done'] = "0";
       echo '<script>window.location= "discam.php"</script>';
     }
     ?>

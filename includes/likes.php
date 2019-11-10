@@ -17,14 +17,14 @@ if(isset($_POST['like']))
                 $sql = $con->prepare("INSERT INTO likes (username, imageid) values (?,?)");
                 $arr = array($_SESSION['login'], $id);
                 $sql->execute($arr);
-                echo '<script>window.location="index.php"</script>';
+                echo '<script>window.location="home.php"</script>';
             }
         else
             {   
                 $sql = $con->prepare("DELETE FROM likes WHERE username = ? AND imageid = ?");
                 $arr = array($_SESSION['login'], $id);
                 $sql->execute($arr);
-                echo '<script>window.location="index.php"</script>';
+                echo '<script>window.location="home.php"</script>';
             }
         }
     }
@@ -53,7 +53,11 @@ if (isset($_POST['commet']))
         $sql = $con->prepare("INSERT INTO comments (userid, imageid, comments) values (?,?,?)");
         $arr = array($_SESSION['login'], $id, $comment);
         $sql->execute($arr);
-        echo '<script>window.location="index.php"</script>';
+
+        //$send = $con->prepare("");
+        //if ()
+        // mail($email,"Confirm your Email",$message, $headers);
+        echo '<script>window.location="home.php"</script>';
     }
     catch(PDOException $e)
     {

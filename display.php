@@ -53,8 +53,8 @@ try
                     ?>
                     <div class = "">
                         <?php
-                        $try = $con->prepare("SELECT id FROM likes WHERE username = ? AND imageid = ?");
-                        $a = array($_SESSION['login'], $v['imageid']);
+                        $try = $con->prepare("SELECT id FROM likes WHERE imageid = ?");
+                        $a = array( $v['imageid']);
                         if ($try->execute($a) === TRUE)
                         {
                            $res = $try->fetchAll();
@@ -78,8 +78,8 @@ try
                             }
                         }
 
-                        $try = $con->prepare("SELECT userid, comments FROM comments");
-                        $a = array($_SESSION['login'], $v['imageid']);
+                        $try = $con->prepare("SELECT userid, comments FROM comments WHERE imageid = ? ");
+                        $a = array( $v['imageid']);
                         if ($try->execute($a) === TRUE)
                         {
                            foreach($try->fetchAll() as $com)

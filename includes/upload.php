@@ -1,14 +1,14 @@
 <?php
- session_start();
+ //session_start();
 // if (isset($_FILES['fileToUpload']))
 // {
     // $name = $_FILES['fileToUpload']['name'];
     // $type = $_FILES['fileToUpload']['tmp_name'];
     // $tmpn =  getimagesize($_FILES['fileToUpload']['tmp_name']);
     
-    function upload($name)
+    function upload($name, $tmp)
     {
-    include_once("connect.php");
+    require "connect.php";
 
     //echo "asdasd";
     //die();
@@ -19,7 +19,9 @@
     // }
     // else if (!empty($tmpn))
     // {
-        move_uploaded_file($name, $target.$name);
+        move_uploaded_file($tmp, $target.$name);
+        
+    
         try
         {
             $sql = $con->prepare("INSERT INTO images (userid, `description`, `image`, `target`, `time`) VALUES(?,?,?,?,now())");
@@ -27,7 +29,7 @@
             if ($sql->execute($arr) === TRUE)
             {
                 echo '<script>alert("Image added succesfully")</script>';
-                echo '<script>window.location = "index.php"</script>';
+                echo '<script>window.location = "home.php"</script>';
             }
         }
         catch(PDOException $e)

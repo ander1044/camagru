@@ -1,5 +1,5 @@
 <?php
-    session_start();
+  //  session_start();
     include_once("connect.php");
     if (isset($_POST['login']))
     {
@@ -29,7 +29,7 @@
                         $_SESSION['login'] = $pass['userid'];
                         $_SESSION['email'] = $pass['email'];
                         echo '<script>alert("Password Correct")</script>';
-                        echo '<script>window.location = "index.php" </script>';
+                        echo '<script>window.location = "home.php" </script>';
                     }
                     else
                     {

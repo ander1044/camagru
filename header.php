@@ -10,8 +10,9 @@
                 <a href="login.php" class="logo">THE_GRAM</a>
                 <div class = "header_right">
                 <?php
-                    if(isset($_SESSION['userid'])){
-                        echo 'userid';
+                session_start();
+                    if(isset($_SESSION['login'])){
+                     //   echo 'userid';
                         echo '
                         <a class="main" href="home.php">HOME</a>
                         <a class="#about" href="#">ABOUT</a>

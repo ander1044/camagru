@@ -21,7 +21,9 @@ require ("header.php");
     </select>
     <input type="submit" value="Upload Image" name="submit">
     </form>
-<?php
+
+    <?php
+    require('display.php');
 // if(isset($_FILES["fileToUpload"]))
 // {
 
@@ -60,14 +62,14 @@ if(isset($_POST['submit']))
     else if (!strcmp($selected, "none"))
     {
         require 'includes/upload.php';
-        upload($_FILES["fileToUpload"]["name"]);
+        upload($_FILES["fileToUpload"]["name"], $_FILES["fileToUpload"]["tmp_name"]);
     }
     else
     {
-        $out="uploads/".$_FILES["fileToUpload"]["name"];
-        move_uploaded_file($tmp, $out);
+        $out=$_FILES["fileToUpload"]["name"];
+        move_uploaded_file($tmp,"uploads/".$out);
         $stamp = imagecreatefrompng($selected);
-        $im = imagecreatefromjpeg( $out);
+        $im = imagecreatefromjpeg( "uploads/".$out);
         $marge_right = 10;
         $marge_bottom = 10;
         $sx = imagesx($stamp);
@@ -75,10 +77,26 @@ if(isset($_POST['submit']))
         
         imagecopy($im, $stamp, 0, imagesy($im) - $sy - $marge_bottom, 0, 0, imagesx($stamp), imagesy($stamp));
 
-        imagejpeg($im,$out);
+        imagejpeg($im,"uploads/".$out);
         imagedestroy($im);
-        require 'includes/upload.php';
-        upload( $out);
+        
+        copy("uploads/".$out, "images/".$out);
+  
+        try
+        {
+            require 'includes/connect.php';
+            $sql = $con->prepare("INSERT INTO images (userid, `description`, `image`, `target`, `time`) VALUES(?,?,?,?,now())");
+            $arr = array($_SESSION['login'],"",$out, "images/".$out);
+            if ($sql->execute($arr) === TRUE)
+            {
+                echo '<script>alert("Image added succesfully")</script>';
+                echo '<script>window.location = "home.php"</script>';
+            }
+        }
+        catch(PDOException $e)
+        {
+            echo $e;
+        }
        //echo "<img src = $out>";
     }
 }

@@ -42,65 +42,70 @@
    
 <?php
 
-session_start();
-$target = $_SESSION['url'];
-$image = "output".date('Y-m-dH-i-s').".jpeg";
-imagejpeg(imagecreatefromstring(file_get_contents($target)), "uploads/".$image);
-echo '<img src = "uploads/'.$image.'">'; 
 
-if (isset($_POST['apply']))
+ //   echo '<script>alert("here")</script>';
+    
+    session_start();
+    $target = $_SESSION['url'];
+   
+    //echo $target;
+   // die();
+   if (!strcmp($_SESSION['done'], "0"))
+   {
+    $image = "output".date('Y-m-dH-i-s').".jpeg";
+    imagejpeg(imagecreatefromstring(file_get_contents($target)), "uploads/".$image);
+    echo '<img src = "uploads/'.$image.'">'; 
+    $_SESSION['url'] = $image;
+    $_SESSION['done'] = "1";
+   }
+   if (isset($_POST['apply']))
 {
+
   $selected = $_POST["stickers"];
+   if (strcmp($selected, "none"))
+   {
+       //echo $_SESSION['url'];
+       //die();
+        $im = imagecreatefromjpeg("uploads/".$_SESSION['url']);
+        $stamp = imagecreatefrompng($selected);
    
-  $im = imagecreatefromjpeg("uploads/".$image);
-  $stamp = imagecreatefrompng($selected);
-   
-  $marge_right = 10;
-  $marge_bottom = 10;
-  $sx = imagesx($stamp);
-  $sy = imagesy($stamp);
+        $marge_right = 10;
+        $marge_bottom = 10;
+        $sx = imagesx($stamp);
+        $sy = imagesy($stamp);
 
-  imagecopy($im, $stamp, 0, imagesy($im) - $sy - $marge_bottom, 0, 0, imagesx($stamp), imagesy($stamp));
+        imagecopy($im, $stamp, 0, imagesy($im) - $sy - $marge_bottom, 0, 0, imagesx($stamp), imagesy($stamp));
 
-  $out="uploads/".$image;
+        $out=$_SESSION['url'];
   
-  imagejpeg($im,$out);
-  imagedestroy($im);
+        imagejpeg($im,"uploads/".$out);
+        imagedestroy($im);
+   }
+   else
+   {
+       $out = $_SESSION['url'];
+   }
+  //$_SESSION['url'] = $out;
 
-  $_SESSION['url'] = $out;
-  echo '<script>window.location= "discam.php?"</script>';
-}
-?>
+  //echo $out;
+  //die();
+  copy("uploads/".$out, "images/".$out);
+  
+          try
+          {
+              require 'includes/connect.php';
+              $sql = $con->prepare("INSERT INTO images (userid, `description`, `image`, `target`, `time`) VALUES(?,?,?,?,now())");
+              $arr = array($_SESSION['login'],"",$out, "images/".$out);
+              if ($sql->execute($arr) === TRUE)
+              {
+                  echo '<script>alert("Image added succesfully")</script>';
+                  echo '<script>window.location = "home.php"</script>';
+              }
+          }
+          catch(PDOException $e)
+          {
+              echo $e;
+          }
+    }
 
-<form method = "POST">
-        <input type ="hidden" name = "url">
-        <input type  = "submit" name = "upload">
-</form>
-</body>
-</html>
-
-<?php
-
-if (isset($_POST['upload']))
-{
-  $target = "images/";
-  $name = $_SESSION['url'];
-
-  move_uploaded_file($name, $target.$name);
-
-        try
-        {
-            $sql = $con->prepare("INSERT INTO images (userid, `description`, `image`, `target`, `time`) VALUES(?,?,?,?,now())");
-            $arr = array($_SESSION['login'],"",$name, "images/".$name);
-            if ($sql->execute($arr) === TRUE)
-            {
-                echo '<script>alert("Image added succesfully")</script>';
-                echo '<script>window.location = "index.php"</script>';
-            }
-        }
-        catch(PDOException $e)
-        {
-            echo $e;
-        }
-}
 ?>

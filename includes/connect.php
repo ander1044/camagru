@@ -1,6 +1,6 @@
 <?php
 
-    include_once 'database.php';
+    require 'database.php';
 
     try
     {
