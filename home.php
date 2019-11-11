@@ -80,13 +80,14 @@ if(isset($_POST['submit']))
         imagejpeg($im,"uploads/".$out);
         imagedestroy($im);
         
-        copy("uploads/".$out, "images/".$out);
+        $images = "output".date('Y-m-dH-i-s').".jpeg";
+        copy("uploads/".$out, "images/".$images);
   
         try
         {
             require 'includes/connect.php';
             $sql = $con->prepare("INSERT INTO images (userid, `description`, `image`, `target`, `time`) VALUES(?,?,?,?,now())");
-            $arr = array($_SESSION['login'],"",$out, "images/".$out);
+            $arr = array($_SESSION['login'],"",$out, "images/".$images);
             if ($sql->execute($arr) === TRUE)
             {
                 echo '<script>alert("Image added succesfully")</script>';

@@ -72,6 +72,7 @@ try
                                 ?>
                                 <form method = "post">
                                 <input type = "hidden" name = "id" value = "<?php echo $v['imageid']?>">
+                               
                                 <button name = "like">unlike</button>
                             </form>
                                 <?php
@@ -99,6 +100,7 @@ try
                         <form method = "post">
                             <textarea name = "comment" placeholder ="comments"></textarea>
                             <input type = "hidden" name = "id" value = "<?php echo $v['imageid']?>">
+                            <input type = "hidden" name = "userid" value = "<?php echo $v['userid']?>">
                             <button name = "commet">Comment</button>
                         </form>
                     </div>

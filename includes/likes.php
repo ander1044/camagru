@@ -39,6 +39,7 @@ if (isset($_POST['commet']))
 {
     $id = $_POST['id'];
     $comment = $_POST['comment'];
+    $us = $_POST['userid'];
 
     if (empty($comment))
     {
@@ -54,10 +55,24 @@ if (isset($_POST['commet']))
         $arr = array($_SESSION['login'], $id, $comment);
         $sql->execute($arr);
 
-        //$send = $con->prepare("");
-        //if ()
-        // mail($email,"Confirm your Email",$message, $headers);
-        echo '<script>window.location="home.php"</script>';
+        $send = $con->prepare("SELECT email from users where userid = (SELECT userid FROM images WHERE userid = ? AND imageid = ?)");
+        
+        //  die();
+        $send->execute([$us, $id]);
+        
+      //  foreach()
+       // echo $us."     ".$id;
+        $res= $send->fetchAll();
+       // print_r($res);
+       // die();
+            if (!empty($res))
+            {
+                $email = $res[0]['email'];
+           //     echo $email;
+         //       die();
+                mail($email,"Gram notification","Someone commented on your picture. Login to check");
+            }
+    echo '<script>window.location="home.php"</script>';
     }
     catch(PDOException $e)
     {

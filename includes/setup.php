@@ -26,7 +26,8 @@ try{
         `password` VARCHAR(100) NOT NULL,
         gender VARCHAR(10),
         email VARCHAR(100) UNIQUE,
-        verified INT(2)
+        verified INT(2),
+        notific INT NOT NULL DEFAULT '1'
         )
     ");
     $imagetable = $conn->prepare("CREATE TABLE images(
