@@ -1,3 +1,14 @@
+<?php
+session_start();
+if (!isset($_SESSION['login']))
+{
+    echo '<script>window.location="login.php"</script>';
+}
+elseif(!isset($_SESSION['url']))
+{
+    echo '<script>window.location="camera.php"</script>'; 
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,8 +53,7 @@
    
 <?php
 
-    
-    session_start();
+  
     $target = $_SESSION['url'];
    
 

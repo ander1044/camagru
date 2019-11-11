@@ -55,21 +55,14 @@ if (isset($_POST['commet']))
         $arr = array($_SESSION['login'], $id, $comment);
         $sql->execute($arr);
 
-        $send = $con->prepare("SELECT email from users where userid = (SELECT userid FROM images WHERE userid = ? AND imageid = ?)");
+        $send = $con->prepare("SELECT email from users where notific = 1 AND userid = (SELECT userid FROM images WHERE userid = ? AND imageid = ?)");
         
-        //  die();
         $send->execute([$us, $id]);
-        
-      //  foreach()
-       // echo $us."     ".$id;
         $res= $send->fetchAll();
-       // print_r($res);
-       // die();
+     
             if (!empty($res))
             {
                 $email = $res[0]['email'];
-           //     echo $email;
-         //       die();
                 mail($email,"Gram notification","Someone commented on your picture. Login to check");
             }
     echo '<script>window.location="home.php"</script>';
@@ -79,6 +72,25 @@ if (isset($_POST['commet']))
         echo $e;
     }
     $con = null;
+    }
+}
+
+if (isset($_POST['delete']))
+{
+    $del = $_POST['id'];
+    include_once('connect.php');
+    $sql = $con->prepare("DELETE FROM images WHERE imageid = ?");
+    $sql = $con->prepare("DELETE FROM comments WHERE imageid = ?");
+
+    if ($sql->execute([$del]))
+    {
+        echo '<script>alert("Deleted")</script>';
+        echo '<script>window.location="home.php"</script>'; 
+    }
+    else
+    {
+        echo '<script>alert(Could not delete)</script>';
+        echo '<script>window.location="home.php"</script>';
     }
 }
 ?>

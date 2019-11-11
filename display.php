@@ -105,7 +105,18 @@ try
                             <button name = "commet">Comment</button>
                         </form>
                     </div>
+                        <?php
+                            if (!strcmp($_SESSION['login'], $v['userid']))
+                            {
+                        ?>
+                    <div class = "">
+                        <form method = "post">
+                        <input type = "hidden" name = "id" value = "<?php echo $v['imageid']?>">
+                        <button name = "delete">Delete Image</button>
+                        </form>
+                    </div>
                     <?php
+                            }
                 }
             }
             }

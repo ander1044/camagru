@@ -1,8 +1,8 @@
 <?php
-    include_once("connect.php");
    
-    if (isset($_POST['signup']))
-    {
+   if (isset($_POST['signup']))
+   {
+    include_once("connect.php");
         $email = $_POST['email'];
         $fullname = strip_tags($_POST['name']);
         $username = strip_tags($_POST['username']);

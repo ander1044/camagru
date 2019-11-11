@@ -2,9 +2,12 @@
 
 try 
 {
-
         include_once("connect.php");
         $user = $_GET['v'];
+        if (!isset($user))
+        {
+            echo '<script>window.location="login.php"</script>';
+        }
         
         $sql = $con->prepare("SELECT userid FROM token_t WHERE token = ?");
         $sql->execute([$user]);

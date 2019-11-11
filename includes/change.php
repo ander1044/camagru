@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 if (isset($_POST['email_change']))
 {
@@ -99,6 +100,31 @@ if (isset($_POST['email_change']))
             catch(PDOException $e)
             {
                 echo "error".$e;
+            }
+        }
+    }
+    if (isset($_POST['notific']))
+    {
+        require 'connect.php';
+        $cha = $_POST['notif'];
+        if (!empty($cha))
+        {
+            if (!strcmp($cha, "yes"))
+            {
+
+                $sql = $con->prepare("UPDATE users SET notific = 1 WHERE userid = ?");
+                if ($sql->execute([$_SESSION['login']]))
+                {
+                    echo '<script>alert("Infomation Changed.!")</script>';
+                }
+            }
+            else
+            {
+                $sql = $con->prepare("UPDATE users SET notific = 0 WHERE userid = ?");
+                if ($sql->execute([$_SESSION['login']]))
+                {
+                    echo '<script>alert("Infomation Changed.!")</script>';
+                }
             }
         }
     }

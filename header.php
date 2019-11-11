@@ -14,8 +14,9 @@
                     if(isset($_SESSION['login'])){
                      //   echo 'userid';
                         echo '
-                        <a class="main" href="home.php">HOME</a>
-                        <a class="#about" href="#">ABOUT</a>
+                        <a class="" href="home.php">HOME</a>
+                        <a class="" href="camera.php">Camera</a>
+                        <a class="" href="changedetails.php">Update Information</a>
                         <a class="#signout" href="includes/signout_inc.php">LOGOUT</a>';
                     }else
                     echo'

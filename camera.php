@@ -1,4 +1,10 @@
 <?php
+  
+session_start();
+if (!isset($_SESSION['login']))
+{
+    echo '<script>window.location="login.php"</script>';
+}
 require("header.php");
 require("includes/upload.php");
 ?>
