@@ -42,14 +42,11 @@
    
 <?php
 
-
- //   echo '<script>alert("here")</script>';
     
     session_start();
     $target = $_SESSION['url'];
    
-    //echo $target;
-   // die();
+
    if (!strcmp($_SESSION['done'], "0"))
    {
     $image = "output".date('Y-m-dH-i-s').".jpeg";
@@ -64,8 +61,6 @@
   $selected = $_POST["stickers"];
    if (strcmp($selected, "none"))
    {
-       //echo $_SESSION['url'];
-       //die();
         $im = imagecreatefromjpeg("uploads/".$_SESSION['url']);
         $stamp = imagecreatefrompng($selected);
    
@@ -85,10 +80,7 @@
    {
        $out = $_SESSION['url'];
    }
-  //$_SESSION['url'] = $out;
-
-  //echo $out;
-  //die();
+  
   copy("uploads/".$out, "images/".$out);
   
           try

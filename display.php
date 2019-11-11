@@ -1,4 +1,4 @@
-<body>
+ <body>
 <?php 
 include_once("includes/connect.php");
 require("includes/likes.php");
@@ -53,6 +53,8 @@ try
                     ?>
                     <div class = "">
                         <?php
+                        if (isset($_SESSION['login']))
+                        {
                         $try = $con->prepare("SELECT id FROM likes WHERE imageid = ?");
                         $a = array( $v['imageid']);
                         if ($try->execute($a) === TRUE)
@@ -72,7 +74,6 @@ try
                                 ?>
                                 <form method = "post">
                                 <input type = "hidden" name = "id" value = "<?php echo $v['imageid']?>">
-                               
                                 <button name = "like">unlike</button>
                             </form>
                                 <?php
@@ -106,6 +107,7 @@ try
                     </div>
                     <?php
                 }
+            }
             }
         }
     }

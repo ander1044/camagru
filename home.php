@@ -1,7 +1,11 @@
  <?php 
 //require ("includes/upload.php");
 require ("header.php");
+if (isset($_SESSION['login']))
+{
 ?>
+
+
 <body>
     <form method = "POST" action="./home.php" enctype="multipart/form-data">
     <textarea name="content" id="" rows="4" placeholder="What's on your mind,<?php echo $username."?" ?>"></textarea><br>
@@ -23,6 +27,7 @@ require ("header.php");
     </form>
 
     <?php
+}
     require('display.php');
 // if(isset($_FILES["fileToUpload"]))
 // {
