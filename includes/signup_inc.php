@@ -4,8 +4,8 @@
     if (isset($_POST['signup']))
     {
         $email = $_POST['email'];
-        $fullname = $_POST['name'];
-        $username = $_POST['username'];
+        $fullname = strip_tags($_POST['name']);
+        $username = strip_tags($_POST['username']);
         $password = $_POST['password'];
         $repassword = $_POST['repassword'];
         $gender = $_POST['gender'];

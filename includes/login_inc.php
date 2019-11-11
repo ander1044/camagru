@@ -3,7 +3,7 @@
     include_once("connect.php");
     if (isset($_POST['login']))
     {
-        $username = $_POST['username'];
+        $username = strip_tags($_POST['username']);
         $password = $_POST['password'];
         if (empty($username) || empty($password))
         {

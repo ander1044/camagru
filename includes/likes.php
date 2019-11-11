@@ -38,7 +38,7 @@ if(isset($_POST['like']))
 if (isset($_POST['commet']))
 {
     $id = $_POST['id'];
-    $comment = $_POST['comment'];
+    $comment = strip_tags($_POST['comment']);
     $us = $_POST['userid'];
 
     if (empty($comment))
