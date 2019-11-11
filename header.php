@@ -1,32 +1,43 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/main.css" />
+    <!-- <link rel="stylesheet" href="css/main.css" /> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <title>The Gram</title>
+    <style>
+         body{background-color: #f1f1f1;}
+    </style>
 </head>
 <body>
-    <header>
-        <div class="header">
-            <nav>
-                <a href="login.php" class="logo">THE_GRAM</a>
-                <div class = "header_right">
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="login.php">THE_GRAM</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
                 <?php
                 session_start();
                     if(isset($_SESSION['login'])){
                      //   echo 'userid';
                         echo '
-                        <a class="" href="home.php">HOME</a>
-                        <a class="" href="camera.php">Camera</a>
-                        <a class="" href="changedetails.php">Update Information</a>
-                        <a class="#signout" href="includes/signout_inc.php">LOGOUT</a>';
+                        <li class="active"><a href="home.php">HOME</a></li>
+                        <li class="active"><a href="camera.php">Camera</a></li>
+                        <li class="active"><a href="changedetails.php">Update Information</a></li>
+                        <li class="active"><a href="includes/signout_inc.php">LOGOUT</a></li>';
                     }else
                     echo'
-                    <a class="main" href="home.php">HOME</a>
-                    <a class="#about" href="#">ABOUT</a>
-                    <a class="#login" href="login.php">SIGNIN</a>
-                    <a class="#signup" href="signup.php">SIGNUP</a>';
+                    <li class="active"><a href="home.php">HOME</a></li>
+                    <li class="active"><a href="#">ABOUT</a></li>
+                    <li class="active"><a href="login.php">SIGNIN</a></li>
+                    <li class="active"><a href="signup.php">SIGNUP</a></li>';
                 ?>            
                     </div>
                 </div>
             </nav>
         </div>
-    </header>
+                </body>

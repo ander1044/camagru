@@ -42,13 +42,14 @@ try
                 if (!empty($v))
                 {
                     ?>
-                    <img src = "<?php  echo $v['target']?>" alt = "<?php  echo $v['image']?>" style = "width: 500px;height: 300px;display: block;">
+                    <div class="container">
+                    <img src = "<?php  echo $v['target']?>" class="img-rounded" alt = "<?php  echo $v['image']?>" style = "width: 500px;height: 300px;display: block;">
                     <?php 
                     $like = $con->prepare("SELECT COUNT(id) as co FROM likes WHERE imageid = ?");
                     if ($like->execute([$v['imageid']]))
                     {
                         $res = $like->fetchAll();
-                        echo "number of likes: ".$res[0]["co"];
+                        echo "Likes: ".$res[0]["co"];
                     }
                     ?>
                     <div class = "">
@@ -65,7 +66,9 @@ try
                                ?>
                             <form method = "post">
                             <input type = "hidden" name = "id" value = "<?php echo $v['imageid']?>">
-                            <button name = "like">like</button>
+                            <button  name = "like" class="btn btn-primary btn-sm">
+                            <span class="glyphicon glyphicon-thumbs-up"></span>like
+                        </button>
                         </form>
                             <?php
                             }
@@ -74,7 +77,9 @@ try
                                 ?>
                                 <form method = "post">
                                 <input type = "hidden" name = "id" value = "<?php echo $v['imageid']?>">
-                                <button name = "like">unlike</button>
+                                <button name = "like" class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-thumbs-down"></span>unlike
+                            </button>
                             </form>
                                 <?php
                             }
@@ -86,11 +91,13 @@ try
                         {
                            foreach($try->fetchAll() as $com)
                            {
-                               ?>
-                               <h5>
-                               <?php echo $com["userid"]?>
-                               </h5>
-                                   <?php echo $com["comments"]?>
+                               ?><div class="col-sm-8">
+                                <div  class="well">
+                               <img src="avatar/avatar.png" class="img-circle" height="55" width="55" alt="Avatar">
+                               <?php echo $com["userid"]?><br>
+                               <?php echo $com["comments"]?>
+                           </div>
+                           </div>
                                <?php
                            }
                         }
@@ -99,10 +106,10 @@ try
                     </div>
                     <div class ="">
                         <form method = "post">
-                            <textarea name = "comment" placeholder ="comments"></textarea>
+                            <textarea class="form-control" rows="5" id="comment" name = "comment" placeholder ="comments"></textarea>
                             <input type = "hidden" name = "id" value = "<?php echo $v['imageid']?>">
                             <input type = "hidden" name = "userid" value = "<?php echo $v['userid']?>">
-                            <button name = "commet">Comment</button>
+                            <button name = "commet" class="btn btn-primary">Comment</button>
                         </form>
                     </div>
                         <?php
@@ -112,7 +119,7 @@ try
                     <div class = "">
                         <form method = "post">
                         <input type = "hidden" name = "id" value = "<?php echo $v['imageid']?>">
-                        <button name = "delete">Delete Image</button>
+                        <button class="btn btn-danger" name = "delete">Delete Image</button>
                         </form>
                     </div>
                     <?php
@@ -134,14 +141,15 @@ catch(PODEXception $e)
     echo $e;
 }
 ?>
+<div class="container">
 <hr>
 <form method = "post" action = "index.php">
-<input type = "submit" value = "next" name  = "next">
+<input type = "submit" class="btn btn-primary" value = "next" name  = "next">
 </form>
 <?php if($_SESSION['pos'] > 0)
 {?>
 <form method = "post" action = "index.php">
-<input type = "submit" value = "prev" name  = "prev">
+<input type = "submit" class="btn btn-primary"  value = "prev" name  = "prev">
 </form>
 <?php }?>
 </body>

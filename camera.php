@@ -23,13 +23,13 @@ require("includes/upload.php");
     <form method = "post" action = "camera.php">
     <video id="video" autoplay>Something went wrong while streaming</video>
 
-    <button id="capture" name = "sub">
+    <button id="capture" class="btn btn-primary" name = "sub">
     Take Picture
     </button>
 
     <input type = "hidden" id = "url" name = "url">
   </form>
-    <button id="clear">Clear</button>
+    <button id="clear" class="btn btn-warning">Clear</button>
     <canvas id="canvas"></canvas>
     </div>
     <div class="bottom-container">

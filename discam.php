@@ -1,4 +1,5 @@
 <?php
+require("header.php");
 session_start();
 if (!isset($_SESSION['login']))
 {
@@ -18,8 +19,8 @@ elseif(!isset($_SESSION['url']))
     <title>Document</title>
 </head>
 <body>
-      
-<select id="filters">
+<div class="container">
+<select class="btn btn-primary" id="filters">
     <option value="none">Default</option>
     <option value="grayscale(100%)">Grayscale</option>
     <option value="sepia(100%)">Sepia</option>
@@ -30,7 +31,7 @@ elseif(!isset($_SESSION['url']))
     </select>
 
     <form method = "POST" >
-    <select name="stickers" id="stickers">
+    <select class="btn btn-primary" name="stickers" id="stickers">
     <option value="none">Default</option>
     <option value="./stickers/sticker1.png">Greentoon</option>
     <option value="./stickers/sticker2.png">Linkedin</option>
@@ -41,10 +42,10 @@ elseif(!isset($_SESSION['url']))
     <option value="./stickers/sticker8.png">Linux Drunk</option>
     
    <input type = "hidden" id = "url" name = "url"> 
-   <input type ="submit" name = "apply" value  = "Apply">
+   <input type ="submit" class="btn btn-primary" name = "apply" value  = "Apply">
     </select>
     </form>
-    <button id="clear">Clear</button>
+    <button class="btn btn-warning" id="clear">Clear</button>
     <canvas id="canvas"></canvas>
     </div>
     <div class="bottom-container">
