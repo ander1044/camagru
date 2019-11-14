@@ -35,38 +35,12 @@ if (isset($_POST['apply']))
               if ($sql->execute($arr) === TRUE)
               {
                   echo '<script>alert("Image added succesfully")</script>';
-                  echo '<script>window.location = "index.php"</script>';
+                  echo '<script>window.location = "home.php"</script>';
               }
           }
           catch(PDOException $e)
           {
               echo $e;
           }
- // echo '<script>window.location= "discam.php?"</script>';
 }
-
-// if (isset($_POST['upload']))
-// {
-//   $target = "images/";
-//   $name = $_SESSION['url'];
-
-//   //echo $name;
-//   //die();
-//   copy("uploads/".$name, $target.$name);
-// die();
-//         try
-//         {
-//             $sql = $con->prepare("INSERT INTO images (userid, `description`, `image`, `target`, `time`) VALUES(?,?,?,?,now())");
-//             $arr = array($_SESSION['login'],"",$name, "images/".$name);
-//             if ($sql->execute($arr) === TRUE)
-//             {
-//                 echo '<script>alert("Image added succesfully")</script>';
-//                 echo '<script>window.location = "index.php"</script>';
-//             }
-//         }
-//         catch(PDOException $e)
-//         {
-//             echo $e;
-//         }
-// }
 ?>
