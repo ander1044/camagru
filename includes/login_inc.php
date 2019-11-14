@@ -1,9 +1,10 @@
 <?php
   //  session_start();
+    include("security.php");
     include_once("connect.php");
     if (isset($_POST['login']))
     {
-        $username = strip_tags($_POST['username']);
+        $username = _e($_POST['username']);
         $password = $_POST['password'];
         if (empty($username) || empty($password))
         {

@@ -1,11 +1,10 @@
  <?php 
-//require ("includes/upload.php");
 require ("header.php");
 if (isset($_SESSION['login']))
 {
 ?>
 
-
+<link rel="stylesheet" href="css/body.css"/>
 <body>
 <div class="container">
     <form method = "POST" action="./home.php" enctype="multipart/form-data">
@@ -30,27 +29,6 @@ if (isset($_SESSION['login']))
     <?php
 }
     require('display.php');
-// if(isset($_FILES["fileToUpload"]))
-// {
-
-    // $target_dir = "images/";
-    // $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-    // $uploadOk = 1;
-    // $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
-
-    // if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-    //     echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
-    // } else {
-    //     echo "<br>Sorry, there was an error uploading your file.";
-    //     exit;
-    // }
-//     $name = $_FILES["fileToUpload"]["name"];
-//     echo $name;
-    
-//      echo "<img src=$name >";
-//     die();
-// }
-
 ?>
 <?php
 
@@ -104,7 +82,6 @@ if(isset($_POST['submit']))
         {
             echo $e;
         }
-       //echo "<img src = $out>";
     }
 }
 

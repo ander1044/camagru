@@ -1,6 +1,6 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- <link rel="stylesheet" href="css/main.css" /> -->
+    <!-- <link rel="stylesheet" href="css/styling.css" /> -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <title>The Gram</title>
     <style>
@@ -16,14 +16,14 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <a class="navbar-brand" href="login.php">THE_GRAM</a>
+      <a class="navbar-brand" href="#">THE_GRAM</a>
     </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
+  
       <ul class="nav navbar-nav">
                 <?php
                 session_start();
-                    if(isset($_SESSION['login'])){
-                     //   echo 'userid';
+                    if(isset($_SESSION['login']))
+                    {
                         echo '
                         <li class="active"><a href="home.php">HOME</a></li>
                         <li class="active"><a href="camera.php">Camera</a></li>

@@ -2,10 +2,11 @@
    
    if (isset($_POST['signup']))
    {
+    include("security.php");
     include_once("connect.php");
         $email = $_POST['email'];
-        $fullname = strip_tags($_POST['name']);
-        $username = strip_tags($_POST['username']);
+        $fullname = _e($_POST['name']);
+        $username = _e($_POST['username']);
         $password = $_POST['password'];
         $repassword = $_POST['repassword'];
         $gender = $_POST['gender'];

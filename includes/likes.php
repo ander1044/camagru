@@ -3,6 +3,7 @@
 if(isset($_POST['like']))
 {
     include_once('connect.php');
+    include("security.php");
 
     try{
         $id = $_POST['id'];
@@ -38,7 +39,7 @@ if(isset($_POST['like']))
 if (isset($_POST['commet']))
 {
     $id = $_POST['id'];
-    $comment = strip_tags($_POST['comment']);
+    $comment = _e($_POST['comment']);
     $us = $_POST['userid'];
 
     if (empty($comment))

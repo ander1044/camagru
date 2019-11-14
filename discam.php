@@ -110,5 +110,5 @@ elseif(!isset($_SESSION['url']))
               echo $e;
           }
     }
-
+    include('thumb.php');
 ?>
