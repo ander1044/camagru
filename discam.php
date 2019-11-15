@@ -10,16 +10,6 @@ elseif(!isset($_SESSION['url']))
     echo '<script>window.location="camera.php"</script>'; 
 }
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-<div class="container">
 <select class="btn btn-primary" id="filters">
     <option value="none">Default</option>
     <option value="grayscale(100%)">Grayscale</option>
@@ -110,5 +100,4 @@ elseif(!isset($_SESSION['url']))
               echo $e;
           }
     }
-    include('thumb.php');
 ?>

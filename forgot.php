@@ -3,6 +3,7 @@ require("header.php");
 require("includes/recover_inc.php");
 ?>
 <main>
+<body>
 <div class="container">
 <form  method="POST">
 <h2>Recover Password</h2>
@@ -16,3 +17,4 @@ require("includes/recover_inc.php");
 </div>
 </form>
 </main> 
+</body>

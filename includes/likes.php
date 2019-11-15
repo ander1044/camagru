@@ -81,7 +81,7 @@ if (isset($_POST['delete']))
     $del = $_POST['id'];
     include_once('connect.php');
     $sql = $con->prepare("DELETE FROM images WHERE imageid = ?");
-    $sql = $con->prepare("DELETE FROM comments WHERE imageid = ?");
+    //$sql = $con->prepare("DELETE FROM comments WHERE imageid = ?");
 
     if ($sql->execute([$del]))
     {

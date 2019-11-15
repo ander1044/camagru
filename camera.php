@@ -9,49 +9,62 @@ require("header.php");
 require("includes/upload.php");
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Document</title>
-  <!-- <link rel="stylesheet" href="css/filters.css" /> -->
-  <link rel="stylesheet" href="css/main.css" />
-  
-</head>
-<body>
-    <div class="top-container">
-    <form method = "post" action = "camera.php">
-    <video id="video" autoplay>Something went wrong while streaming</video>
+  <style>
+    img {
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 15px;
+      width: 160px;
+      float: right;
+      margin-right: 0%;
+}
+}
+    img:hover {
+    box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+}
+  </style>
+  <div class="container">
+    <div class="col-md-6">
+      <form method = "post" action = "camera.php">
+      
+        <video id="video" autoplay >Something went wrong while streaming</video>
 
-    <button id="capture" class="btn btn-primary" name = "sub">
-    Take Picture
-    </button>
+        <button id="capture" class="btn btn-primary" name = "sub">
+        Take Picture
+        </button>
 
-    <input type = "hidden" id = "url" name = "url">
-  </form>
-    <button id="clear" class="btn btn-warning">Clear</button>
-    <canvas id="canvas"></canvas>
+        <input type = "hidden" id = "url" name = "url">
+      </form>
+      <button id="clear" class="btn btn-warning">Clear</button>
+    
+      <canvas id="canvas"></canvas>
+      <div id="thumbnail"></div>
     </div>
-    <div class="bottom-container">
-    <div id="thumbnail"></div>
+    <div class="col-md-6">
+      <?php
+      $dir = glob('uploads/{*.jpeg, *jpg}', GLOB_BRACE);
+      foreach ($dir as $value)
+      {
+          ?>
+            <img src="<?php echo $value;?>" alt="<?php?>">
+      <?php
+      }
+      ?>
     </div>
+  </div>
+    
 
     <?php
-    
-  //  session_start();
     if (isset($_POST["sub"]))
     {
 
       $_SESSION['url'] = $_POST["url"];
 
-   //   echo $_SESSION['url'];
-     // require 'discam.php';
-     // dis();
      $_SESSION['done'] = "0";
       echo '<script>window.location= "discam.php"</script>';
     }
     ?>
     <script src="capture.js"></script>
-</body>
-
-</html>
+<?php
+require ("footer.php");
+?>
