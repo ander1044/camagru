@@ -77,8 +77,8 @@ try
                                 ?>
                                 <form method = "post">
                                 <input type = "hidden" name = "id" value = "<?php echo $v['imageid']?>">
-                                <button name = "like" class="btn btn-danger btn-sm">
-                                <span class="glyphicon glyphicon-thumbs-down"></span>unlike
+                                <button name = "like" class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-thumbs-up"></span>like
                             </button>
                             </form>
                                 <?php

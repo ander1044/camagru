@@ -1,6 +1,9 @@
 <?php
 require("header.php");
+if(!isset($_SESSION))
+{
 session_start();
+}
 if (!isset($_SESSION['login']))
 {
     echo '<script>window.location="login.php"</script>';
@@ -32,7 +35,7 @@ elseif(!isset($_SESSION['url']))
     <option value="./stickers/sticker8.png">Linux Drunk</option>
     
    <input type = "hidden" id = "url" name = "url"> 
-   <input type ="submit" class="btn btn-primary" name = "apply" value  = "Apply">
+   <input type ="submit" class="btn btn-primary" name = "apply" value  = "Apply & Upload">
     </select>
     </form>
     <button class="btn btn-warning" id="clear">Clear</button>
