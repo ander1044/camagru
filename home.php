@@ -6,6 +6,7 @@ if (isset($_SESSION['login']))
 
 <link rel="stylesheet" href="css/body.css"/>
 <body>
+<div class="bg">
 <div class="container">
     <form method = "POST" action="./home.php" enctype="multipart/form-data">
     <textarea class="form-control" rows="5" id="comment" placeholder="What's on your mind?"></textarea><br>
@@ -25,7 +26,7 @@ if (isset($_SESSION['login']))
     </select>
     <input type="submit" value="Upload Image" class="btn btn-primary" name="submit">
     </form>
-
+   </div>
     <?php
 }
     require('display.php');

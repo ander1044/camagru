@@ -1,6 +1,4 @@
 <?php
-  //  session_start();
-    // include("security.php");
     include_once("connect.php");
     if (isset($_POST['login']))
     {

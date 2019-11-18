@@ -44,19 +44,12 @@ require("includes/upload.php");
     </div>
     <div class="col-md-6">
       <?php
-      require('includes/connect.php');
-      $sql = $con->prepare("SELECT * FROM images WHERE userid=? ORDER BY time DESC");
-      if($sql->execute([$_SESSION['login']]))
-      {
-        $dir = $sql->fetchAll();
-  
-      // $dir = glob('uploads/{*.jpeg, *jpg}', GLOB_BRACE);
-       foreach ($dir as $value){
-          ?>
-            <img src="<?php echo $value;?>" alt="<?php?>">
+      $dir = glob('uploads/{*.jpeg, *jpg}', GLOB_BRACE);
+      foreach ($dir as $value){
+      ?>
+      <img src="<?php echo $value;?>" alt="<?php?>">
       <?php
       }
-    }
       ?>
     </div>
   </div>

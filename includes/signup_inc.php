@@ -2,7 +2,6 @@
    
    if (isset($_POST['signup']))
    {
-    // include("security.php");
     include_once("connect.php");
         $email = $_POST['email'];
         $fullname = strip_tags($_POST['name']);

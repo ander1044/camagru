@@ -15,7 +15,6 @@ try
         }
     }
     $x = $c['amount'];
-    //$_SESSION['pos'] = 0;
     if (empty($_SESSION['pos']))
     {
         $_SESSION['pos'] = 0;
@@ -25,12 +24,12 @@ try
         if (isset($_POST['next']))
         {
             $_SESSION['pos'] = $_SESSION['pos'] + 5;
-            echo '<script> window.location= "index.php"</script>';
+            echo '<script> window.location= "home.php"</script>';
         }
         if (isset($_POST['prev']))
         {
             $_SESSION['pos'] = $_SESSION['pos'] - 5;
-            echo '<script> window.location= "index.php"</script>';
+            echo '<script> window.location= "home.php"</script>';
         }
         $pos = $_SESSION['pos'];
         $sql = $con->prepare("SELECT * FROM images ORDER BY `time` DESC LIMIT $pos, 5");
