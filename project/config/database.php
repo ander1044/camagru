@@ -2,5 +2,5 @@
 
 $DB_DSN = "localhost";
 $DB_USER = "root";
-$DB_PASSWORD = "197419ander";
+$DB_PASSWORD = "rootpasssaved";
 $dbname = "camagru";

@@ -1,0 +1,30 @@
+version: '3.7'
+
+services:
+  php-httpd:
+    image: php:fpm-alpine3.12
+    ports:
+      - 80:80
+    volumes:
+    - "./project:/var/www/html"
+  
+  mysqldb:
+    image: mysql
+    volumes:
+      - mysqldb-volume:/var/lib/mysql
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "no"
+      MYSQL_ROOT_PASSWORD: "rootpasssaved"
+      MYSQL_USER: 'root'
+      MYSQL_PASSWORD: 'rootpasssaved'
+      MYSQL_DATABASE: 'camagru'
+  
+  phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        links:
+            - 'mysqldb:db'
+        ports:
+            - 8081:80
+
+volumes:
+  mysqldb-volume:
