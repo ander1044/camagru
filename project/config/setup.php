@@ -5,7 +5,7 @@ include_once 'database.php';
 try{
     $con = new PDO("mysql:host=$DB_DSN", $DB_USER, $DB_PASSWORD);
     $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $sql = $con->prepare("CREATE DATABASE camagru");
+    $sql = $con->prepare("CREATE DATABASE IF NOT EXISTS camagru");
     $sql->execute();
     $con = null;
 }
@@ -18,7 +18,7 @@ try{
     $conn = new PDO("mysql:host=$DB_DSN;dbname=$dbname", $DB_USER, $DB_PASSWORD);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
-    $usertable = $conn->prepare("CREATE TABLE users(
+    $usertable = $conn->prepare("CREATE TABLE IF NOT EXISTS users(
         id INT(6) NOT NULL UNIQUE AUTO_INCREMENT,
         firstname VARCHAR(100),
         lastname VARCHAR(100),
@@ -30,7 +30,7 @@ try{
         notific INT NOT NULL DEFAULT '1'
         )
     ");
-    $imagetable = $conn->prepare("CREATE TABLE images(
+    $imagetable = $conn->prepare("CREATE TABLE IF NOT EXISTS images(
         imageid INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
         userid VARCHAR(100) NOT NULL,
         `description` VARCHAR(200),
@@ -38,19 +38,19 @@ try{
         `target` VARCHAR(100) NOT NULL,
         `time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP )ENGINE = InnoDB"
     );
-    $likes = $conn->prepare("CREATE TABLE `likes` 
+    $likes = $conn->prepare("CREATE TABLE IF NOT EXISTS `likes` 
     ( `id` INT NOT NULL AUTO_INCREMENT ,
     `username` VARCHAR(100) NOT NULL ,
     `imageid` VARCHAR(100) NOT NULL ,
     PRIMARY KEY (`id`)) ENGINE = InnoDB;
     ");
-    $tok = $conn->prepare("CREATE TABLE `token_t` ( `id` INT NOT NULL AUTO_INCREMENT ,
+    $tok = $conn->prepare("CREATE TABLE IF NOT EXISTS `token_t` ( `id` INT NOT NULL AUTO_INCREMENT ,
     `userid` VARCHAR(100) NOT NULL ,
     `token` VARCHAR(100) NOT NULL ,
     `expire` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ,
     PRIMARY KEY (`id`)) ENGINE = InnoDB;
     ");
-    $comment = $conn->prepare("CREATE TABLE comments (
+    $comment = $conn->prepare("CREATE TABLE IF NOT EXISTS comments (
         id INT NOT NULL AUTO_INCREMENT ,
         `imageid` VARCHAR(100) NOT NULL ,
         `userid` VARCHAR(100) NOT NULL ,

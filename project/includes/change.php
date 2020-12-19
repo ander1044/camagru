@@ -23,6 +23,7 @@ if (isset($_POST['email_change']))
                 if ($sql->execute($arr) === TRUE)
                 {
                     echo '<script>alert("Your email has been change!")</script>';
+                    //header("Location: changedetails.php");
                     echo '<script>window.location = "changedetails.php"</script>';
          
                 }

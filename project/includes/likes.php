@@ -17,6 +17,7 @@ if(isset($_POST['like']))
                 $sql = $con->prepare("INSERT INTO likes (username, imageid) values (?,?)");
                 $arr = array($_SESSION['login'], $id);
                 $sql->execute($arr);
+                //header("Location: home.php");
                 echo '<script>window.location="home.php"</script>';
             }
         else
@@ -24,6 +25,7 @@ if(isset($_POST['like']))
                 $sql = $con->prepare("DELETE FROM likes WHERE username = ? AND imageid = ?");
                 $arr = array($_SESSION['login'], $id);
                 $sql->execute($arr);
+                //header("Location: home.php");
                 echo '<script>window.location="home.php"</script>';
             }
         }
@@ -65,6 +67,7 @@ if (isset($_POST['commet']))
                 $email = $res[0]['email'];
                 mail($email,"Gram notification","Someone commented on your picture. Login to check");
             }
+    //header("Location: home.php");
     echo '<script>window.location="home.php"</script>';
     }
     catch(PDOException $e)
@@ -84,11 +87,13 @@ if (isset($_POST['delete']))
     if ($sql->execute([$del]))
     {
         echo '<script>alert("Deleted")</script>';
+        //header("Location: home.php");
         echo '<script>window.location="home.php"</script>'; 
     }
     else
     {
         echo '<script>alert(Could not delete)</script>';
+        //header("Location: home.php");
         echo '<script>window.location="home.php"</script>';
     }
 }

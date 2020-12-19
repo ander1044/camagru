@@ -35,6 +35,8 @@ if (isset($_POST['apply']))
               if ($sql->execute($arr) === TRUE)
               {
                   echo '<script>alert("Image added succesfully")</script>';
+                  //echo '<script type="text/javascript">toastr.success("Image added succesfully")</script>';
+                  //header("Location: home.php");
                   echo '<script>window.location = "home.php"</script>';
               }
           }

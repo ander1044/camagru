@@ -6,6 +6,7 @@ try
         $user = $_GET['v'];
         if (!isset($user))
         {
+            //header("Location: login.php");
             echo '<script>window.location="login.php"</script>';
         }
         

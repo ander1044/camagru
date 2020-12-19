@@ -1,5 +1,6 @@
 <?php
     include_once("connect.php");
+    //session_start();
     if (isset($_POST['login']))
     {
         $username = strip_tags($_POST['username']);
@@ -27,7 +28,7 @@
                     {
                         $_SESSION['login'] = $pass['userid'];
                         $_SESSION['email'] = $pass['email'];
-                        echo '<script>alert("Password Correct")</script>';
+                        //header("Location: home.php");
                         echo '<script>window.location = "home.php" </script>';
                     }
                     else

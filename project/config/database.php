@@ -1,6 +1,6 @@
 <?php
 
-$DB_DSN = "localhost";
+$DB_DSN = "mysqldb";
 $DB_USER = "root";
 $DB_PASSWORD = "rootpasssaved";
 $dbname = "camagru";

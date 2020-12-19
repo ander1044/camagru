@@ -1,3 +1,6 @@
+<?php
+include_once 'config/setup.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,14 +10,14 @@
     <title>Document</title>
 </head>
 <body>
-<?php
-require("header.php");
-?>
-<hr>
-<?php
-require("upload_im.php");
-require("display.php");
-
-?>    
+    <?php require("header.php");
+    ?>
+    <hr>
+    <main>
+        <?php
+        require("upload_im.php");
+        require("display.php");
+        ?>
+    </main>
 </body>
 </html>

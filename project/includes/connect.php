@@ -1,10 +1,9 @@
 <?php
 
-$DB_DSN = "localhost";
+$DB_DSN = "mysqldb";
 $DB_USER = "root";
-$DB_PASSWORD = "197419ander";
+$DB_PASSWORD = "rootpasssaved";
 $dbname = "camagru";
-
     try
     {
         $con = new PDO("mysql:host=$DB_DSN;dbname=$dbname", $DB_USER, $DB_PASSWORD);
