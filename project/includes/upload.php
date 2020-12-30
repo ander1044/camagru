@@ -17,7 +17,7 @@
             if ($sql->execute($arr) === TRUE)
             {
                 //echo '<script>alert("Image added succesfully")</script>';
-                echo '<div id="snackbar">Image added succesfully</div>';
+                echo '<script type="text/javascript">toastr.success("Have Fun")</script>';
                 //header("Location: home.php");
                 echo '<script>window.location = "home.php"</script>';
             }

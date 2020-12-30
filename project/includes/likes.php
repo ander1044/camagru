@@ -87,6 +87,7 @@ if (isset($_POST['delete']))
     if ($sql->execute([$del]))
     {
         echo '<script>alert("Deleted")</script>';
+        //echo '<script type="text/javascript">toastr.success("Have Fun")</script>';
         //header("Location: home.php");
         echo '<script>window.location="home.php"</script>'; 
     }
