@@ -92,6 +92,7 @@ if (isset($_POST['email_change']))
                     if ($del->execute())
                     {
                         echo '<script>alert("password updated!")</script>';
+                        echo '<script>window.location = "index.php"<script>';
                     } 
                 }
                 else

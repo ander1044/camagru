@@ -24,7 +24,7 @@ if (isset($_POST['forgot'])){
             $sql = $con->prepare("INSERT INTO token_t (userid, token, expire) VALUES (?,?,NOW() + INTERVAL 1 HOUR)");
             $arr = array($email, $tok);
             if ($sql->execute($arr) === TRUE){
-                $message = '<a href ="http://localhost:8080/camagru/passwordrecovery.php?checker='.$checker.'&v='.$tok.'">Click here to change your password</a>';       
+                $message = '<a href ="http://localhost/passwordrecovery.php?checker='.$checker.'&v='.$tok.'">Click here to change your password</a>';       
                 $headers  = 'MIME-Version: 1.0' . "\r\n";
                 $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
                 mail($email, "email Recovery", $message, $headers);
